@@ -6,6 +6,7 @@ const  UserSchema = new Schema({
 name: String,
 username: String,
 password: String,
+DOB: String,
 followers: [[{ type: Schema.Types.ObjectId, ref: 'User' }]],
 following: [[{ type: Schema.Types.ObjectId, ref: 'User' }]],
 uploads: []
