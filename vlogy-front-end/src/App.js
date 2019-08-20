@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import Landing from './Components/Landing'
 
 
 class App extends Component {
@@ -21,17 +22,17 @@ class App extends Component {
       data
     })
   }
-  
+
 
 
   newClient = async (client) => {
     axios.post('http://localhost:8080/Video', client)
-   
+
     this.myData()
 
   }
 
-  
+
 
   componentDidMount = async () => {
     this.myData()
@@ -39,7 +40,7 @@ class App extends Component {
 
 
   updateDescription = async (user) => {
-     await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
+    await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
     this.myData()
   }
 
@@ -49,8 +50,8 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
+        <Landing />
 
-       
       </div>
     );
   }
