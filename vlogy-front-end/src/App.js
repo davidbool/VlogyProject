@@ -10,7 +10,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      MovieData:[],
+      MovieData: [],
       data: [],
       UserData: []
 
@@ -27,7 +27,6 @@ class App extends Component {
   }
 
 
-
   newUser = async (user) => {
     axios.post('http://localhost:5000/newUser', user)
     this.myData()
@@ -36,7 +35,7 @@ class App extends Component {
 
 
   UserExict = (login) => {
-    axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`).then((res)=> {
+    axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`).then((res) => {
       if (res.data[0] === undefined) {
         alert('User not found')
 
@@ -52,24 +51,27 @@ class App extends Component {
   }
 
 
-
-
-  // componentDidMount = async () => {
-  //   this.myData()
-  // }
-
-
-
-
+  componentDidMount = async () => {
+    this.myData()
+  }
 
 
   render() {
     return (
       <Router>
         <div className="App" >
+          <div className='main-links'>
+            <Link to='/feed'>Feed</Link>
+            <Link to='/'>Landing</Link>
+          </div>
 
+
+          <Route path="/feed" exact render={() => <Feed data={this.state.MovieData} />} />
+
+          <Route path='/' exact render={() => <Landing UserExict={this.UserExict} newUser={this.newUser} />} />
 
         </div>
+
         <Route path="/feed" exact render={() => <Feed data={this.state.UserData}  />} />
       <div className="App" >
         <Landing UserExict={this.UserExict} newUser={this.newUser} />
@@ -77,6 +79,7 @@ class App extends Component {
       </div>
       </Router>
     );
+    
   }
 
 }
