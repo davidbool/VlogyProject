@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import Feed from './Components/Feed';
 import Landing from './Components/Landing'
 
 
@@ -10,6 +11,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      MovieData: [],
       data: [],
       UserData: {}
 
@@ -26,13 +28,10 @@ class App extends Component {
   }
 
 
-
   newUser = async (user) => {
     axios.post('http://localhost:5000/newUser', user)
     this.myData()
     console.log(this.state.data)
-
-
   }
 
   UserExict = async(login) => {
@@ -50,7 +49,6 @@ class App extends Component {
         
       }
     return res.data[0]
-    
   }
 
 
@@ -63,25 +61,22 @@ class App extends Component {
         UserData:{}
     })}
 
-  // updateDescription = async (user) => {
-  //   await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
-  //   this.myData()
-  // }
-
-
-
-
   render() {
-   
     return (
-      <div className="App" >
-        
+      <Router>
+        <div className="App" >
+          <div className='main-links'>
+            <Link to='/feed'>Feed</Link>
+            <Link to='/'>Landing</Link>
+          </div>
+         <div>
+          <Route path="/feed" exact render={() => <Feed data={this.state.UserData}  />} />
+        </div>
         <Landing deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
-       
-       
-       
       </div>
+      </Router>
     );
+    
   }
 
 }
