@@ -37,9 +37,11 @@
 
 .video-cont{
   display: grid;
-  grid-template-columns: repeat(3, 3fr);
-  grid-gap: 60px
+  grid-template-columns: repeat(1, 3fr);
+  grid-gap: 60px;
+  margin-left:450px 
 
+}
 
 .signupbutton{
   position: absolute;
@@ -47,4 +49,11 @@
   left:0%;
   margin-top: 150px
   ;margin-left: 48%
+}
+
+
+.main-links{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
 }
