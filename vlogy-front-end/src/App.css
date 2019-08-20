@@ -35,6 +35,12 @@
   
 }
 
+.video-cont{
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  grid-gap: 60px
+
+
 .signupbutton{
   position: absolute;
   top: 0%;
