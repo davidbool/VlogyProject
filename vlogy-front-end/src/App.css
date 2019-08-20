@@ -1,9 +1,10 @@
-#username{
+#username {
   text-align: center;
   font-size: 30px;
   color: black
 }
-#password{
+
+#password {
   text-align: center;
   font-size: 30px;
   color: black
@@ -16,29 +17,75 @@
   height: 130px;
   margin: 20px auto 0;
   width: 298px;
-  
 }
 
-.submit{
+.submit {
   text-align: center;
   font-size: 30px;
-  margin-left:100px
+  margin-left: 100px
 }
 
 .signup {
-  
   border: 1px solid #ffffff;
   border-radius: 6px;
   height: 500px;
   margin: 20px auto 0;
   width: 298px;
-  
 }
 
-.signupbutton{
+.signupbutton {
   position: absolute;
   top: 0%;
-  left:0%;
-  margin-top: 150px
-  ;margin-left: 48%
+  left: 0%;
+  margin-top: 150px;
+  margin-left: 48%
+}
+
+.logOut {
+  color: rgb(0, 0, 0);
+  font-size: 40px;
+  position: absolute;
+  top: 0%;
+  right: 0%
+}
+.logOut:hover{
+  color: red
+}
+
+.logOut:active{
+  transform: translateY(4px);
+}
+
+.usernameprofile{
+font-size: 30px;
+text-align: center
+}
+
+.fa-user-alt{
+  font-size: 80px;
+}
+
+.fa-arrow-circle-left{
+  color: blue;
+  font-size: 30px
+}
+
+.fa-arrow-circle-left:active{
+  transform: translateY(4px);
+}
+
+.fa-check{
+  color: green
+}
+
+.fa-times{
+  color: tomato
+}
+
+.fa-hand-spock{
+  color: #64E2FF
+}
+
+.sign{
+  color: black
 }

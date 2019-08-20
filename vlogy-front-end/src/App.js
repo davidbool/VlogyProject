@@ -5,12 +5,13 @@ import './App.css';
 import Landing from './Components/Landing'
 
 
+
 class App extends Component {
   constructor() {
     super()
     this.state = {
       data: [],
-      UserData: []
+      UserData: {}
 
     }
   }
@@ -34,8 +35,8 @@ class App extends Component {
 
   }
 
-  UserExict = (login) => {
-    axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`).then((res)=> {
+  UserExict = async(login) => {
+    let res = await axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`)
       if (res.data[0] === undefined) {
         alert('User not found')
 
@@ -46,8 +47,10 @@ class App extends Component {
         }, function () {
           console.log(this.state.UserData)
         })
+        
       }
-    })
+    return res.data[0]
+    
   }
 
 
@@ -55,6 +58,10 @@ class App extends Component {
     this.myData()
   }
 
+  deleteuser=()=>{
+    this.setState({
+        UserData:{}
+    })}
 
   // updateDescription = async (user) => {
   //   await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
@@ -65,10 +72,14 @@ class App extends Component {
 
 
   render() {
+   
     return (
       <div className="App" >
-        <Landing UserExict={this.UserExict} newUser={this.newUser} />
-
+        
+        <Landing deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+       
+       
+       
       </div>
     );
   }

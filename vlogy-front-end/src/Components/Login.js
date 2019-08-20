@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -8,7 +8,8 @@ class Login extends Component {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+
 
 
         }
@@ -32,10 +33,15 @@ class Login extends Component {
 
 
 
-    UserExict = () => {
-        this.props.UserExict({username:this.state.username, password:this.state.password})
+    UserExict = async () => {
+        console.log('hello')
+        let UserData = await this.props.UserExict({ username: this.state.username, password: this.state.password })
+        console.log(UserData)
+      
+
     }
 
+   
 
     render() {
 
@@ -43,11 +49,16 @@ class Login extends Component {
         return (
 
             <div >
+
+
                 <div class="login">
                     <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="User name" id="username" />
                     <input type="password" value={this.state.password} onChange={this.handlePassword} placeholder="Password" id="password" />
-                    <button onClick={this.UserExict} className="submit" type='submit'> LogIn</button>
-                    <Link className="signupbutton" to="/signup"><div>Sign-Up</div></Link>
+                   <Link to="userprofile"><button onClick={this.UserExict} className="submit" type='submit'> LogIn <i class="far fa-hand-spock"></i></button></Link> 
+
+
+
+                    <Link className="signupbutton" to="/signup"><div className="sign">Sign-Up</div></Link>
 
                 </div>
 
