@@ -7,6 +7,8 @@ name: String,
 username: String,
 password: String,
 DOB: String,
+profilePic: String,
+about: String,
 followers: [[{ type: Schema.Types.ObjectId, ref: 'User' }]],
 following: [[{ type: Schema.Types.ObjectId, ref: 'User' }]],
 uploads: []
