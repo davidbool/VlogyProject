@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Comment from './Comment' 
+import Comment from './Comment'
 class Videos extends Component {
     constructor() {
         super()
@@ -38,11 +38,10 @@ class Videos extends Component {
             <div className='video-cont'>
                 {this.state.data.map(d =>
                     <div>
-                        <Comment />
-
                         <video width="320" height="240" controls>
                             <source src={`http://localhost:5000/video/${d}`} />
                         </video>
+                        <Comment />
                     </div>
                 )}
             </div>
