@@ -6,13 +6,14 @@ import Feed from './Components/Feed';
 import Landing from './Components/Landing'
 
 
+
 class App extends Component {
   constructor() {
     super()
     this.state = {
       MovieData: [],
       data: [],
-      UserData: []
+      UserData: {}
 
     }
   }
@@ -33,9 +34,8 @@ class App extends Component {
     console.log(this.state.data)
   }
 
-
-  UserExict = (login) => {
-    axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`).then((res) => {
+  UserExict = async(login) => {
+    let res = await axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`)
       if (res.data[0] === undefined) {
         alert('User not found')
 
@@ -46,8 +46,9 @@ class App extends Component {
         }, function () {
           console.log(this.state.UserData)
         })
+        
       }
-    })
+    return res.data[0]
   }
 
 
@@ -55,6 +56,10 @@ class App extends Component {
     this.myData()
   }
 
+  deleteuser=()=>{
+    this.setState({
+        UserData:{}
+    })}
 
   render() {
     return (
@@ -64,18 +69,10 @@ class App extends Component {
             <Link to='/feed'>Feed</Link>
             <Link to='/'>Landing</Link>
           </div>
-
-
-          <Route path="/feed" exact render={() => <Feed data={this.state.MovieData} />} />
-
-          <Route path='/' exact render={() => <Landing UserExict={this.UserExict} newUser={this.newUser} />} />
-
+         <div>
+          <Route path="/feed" exact render={() => <Feed data={this.state.UserData}  />} />
         </div>
-
-        <Route path="/feed" exact render={() => <Feed data={this.state.UserData}  />} />
-      <div className="App" >
-        <Landing UserExict={this.UserExict} newUser={this.newUser} />
-
+        <Landing deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     );
