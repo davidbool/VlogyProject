@@ -14,7 +14,6 @@ class Landing extends Component {
     }
 
 
-
     render() {
 
 
@@ -22,8 +21,8 @@ class Landing extends Component {
 
             <div >
                 <Router>
-                    <Route path="/" exact render={() => <Login />} />
-                    <Route path="/signup" exact render={() => <Signup />} />
+                    <Route path="/" exact render={() => <Login UserExict={this.props.UserExict} />} />
+                    <Route path="/signup" exact render={() => <Signup newUser={this.props.newUser} />} />
                     
                 </Router>
 

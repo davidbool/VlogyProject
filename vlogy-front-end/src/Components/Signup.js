@@ -59,23 +59,34 @@ class Signup extends Component {
         })
     }
 
+
     signup = () => {
         let name = this.state.fname + " " + this.state.lname
-        let DOB = this.state.DOB  
+        let DOB = this.state.DOB
         let password = this.state.passwordagain
         let username = this.state.username
-     
+        this.props.newUser({ name: name, username: username, password: password, DOB: DOB })
+
         console.log(`name:${name} ,birthday: ${DOB} ,password: ${password} ,username: ${username}`)
     }
 
-    NotTheSamePass = () => {
-        alert('not the same passwords. Please type a password again')
+
+    notfilled = () => {
+        alert('please fill in the whole details.')
     }
 
+    notTheSamePS = () => {
+        alert('Not the same passwords. please type again!')
+    }
 
     render() {
 
-
+        let fname = this.state.fname
+        let lname = this.state.lname
+        let DOB = this.state.DOB
+        let password = this.state.password
+        let passwordagain = this.state.passwordagain
+        let username = this.state.username
 
         return (
 
@@ -87,7 +98,15 @@ class Signup extends Component {
                     UserName: <input value={this.state.username} onChange={this.handleUserName} type="text" placeholder="" id="username" />
                     Password:  <input value={this.state.password} onChange={this.handlePassword} type="password" placeholder="" id="password" />
                     Type your new password again: <input value={this.state.passwordagain} onChange={this.handlePasswordagain} type="password" placeholder="" id="password" />
-                    {this.state.passwordagain === this.state.password ? <Link to='/' ><button className="submit" type='submit' onClick={this.signup}>  SignUp</button> </Link> : <button className="submit" type='submit' onClick={this.NotTheSamePass}>  SignUp</button>}
+                    {fname === '' || lname === '' || DOB === '' || passwordagain === '' || password === '' || username === '' ?
+                        <button className="submit" type='submit' onClick={this.notfilled}>  SignUp</button> :
+                        <div> {this.state.password === this.state.passwordagain ?
+                            <Link to='/' ><button className="submit" type='submit' onClick={this.signup}>  SignUp</button> </Link> :
+                            <button onClick={this.notTheSamePS} className="submit" type='submit'>  SignUp</button>}</div>
+                    }
+
+
+
                 </div>
             </div>
 

@@ -13,9 +13,11 @@ router.get('/users', (req, res) =>{ //gets all the users
   })
 })
 
-router.get('/username/:username/password/:password', (req, res) =>{ //cheks if the exists
+router.get('/username/:username/password/:password', (req, res) =>{
+  console.log(req.params) //cheks if the exists
   User.find({username: req.params.username, password: req.params.password}, function(err, docs){
     res.send(docs)
+    console.log(docs)
   })
 })
 

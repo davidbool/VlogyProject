@@ -10,13 +10,14 @@ class App extends Component {
     super()
     this.state = {
       data: [],
+      UserData: []
 
     }
   }
 
 
   myData = async () => {
-    let data = await axios.get('http://localhost:8080/Vlogs')
+    let data = await axios.get('http://localhost:5000/users')
     data = data.data
     this.setState({
       data
@@ -25,13 +26,29 @@ class App extends Component {
 
 
 
-  newClient = async (client) => {
-    axios.post('http://localhost:8080/Video', client)
-
+  newUser = async (user) => {
+    axios.post('http://localhost:5000/newUser', user)
     this.myData()
+    console.log(this.state.data)
+
 
   }
 
+  UserExict = (login) => {
+    axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`).then((res)=> {
+      if (res.data[0] === undefined) {
+        alert('User not found')
+
+      } else {
+        let UserData = res.data[0]
+        this.setState({
+          UserData
+        }, function () {
+          console.log(this.state.UserData)
+        })
+      }
+    })
+  }
 
 
   componentDidMount = async () => {
@@ -39,10 +56,10 @@ class App extends Component {
   }
 
 
-  updateDescription = async (user) => {
-    await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
-    this.myData()
-  }
+  // updateDescription = async (user) => {
+  //   await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
+  //   this.myData()
+  // }
 
 
 
@@ -50,7 +67,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        <Landing />
+        <Landing UserExict={this.UserExict} newUser={this.newUser} />
 
       </div>
     );

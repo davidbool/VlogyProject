@@ -7,12 +7,34 @@ class Login extends Component {
     constructor() {
         super()
         this.state = {
-            
+            username: '',
+            password: ''
 
 
         }
     }
 
+
+    handleUserName = (u) => {
+        let username = u.target.value
+        this.setState({
+            username
+        })
+    }
+
+
+    handlePassword = (p) => {
+        let password = p.target.value
+        this.setState({
+            password
+        })
+    }
+
+
+
+    UserExict = () => {
+        this.props.UserExict({username:this.state.username, password:this.state.password})
+    }
 
 
     render() {
@@ -22,9 +44,9 @@ class Login extends Component {
 
             <div >
                 <div class="login">
-                    <input type="text" placeholder="User name" id="username" />
-                    <input type="text" placeholder="Password" id="password" />
-                    <button className="submit" type='submit'> LogIn</button>
+                    <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="User name" id="username" />
+                    <input type="password" value={this.state.password} onChange={this.handlePassword} placeholder="Password" id="password" />
+                    <button onClick={this.UserExict} className="submit" type='submit'> LogIn</button>
                     <Link className="signupbutton" to="/signup"><div>Sign-Up</div></Link>
 
                 </div>
