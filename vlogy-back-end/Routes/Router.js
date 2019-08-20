@@ -24,66 +24,62 @@ conn.once('open', () => {
 // @route POST /upload
 // @desc  Uploads file to DB
 router.post('/upload', upload.single('file'), (req, res) => {
-    let video = {name: req.file.filename, date: req.file.uploadDate}
-    User.find({name: "david"}, function(err, docs){
-        docs[0].uploads.push(video)
-        docs[0].save()
-    })
-    // res.json({ file: req.file });
-    res.end()
-  });
+console.log(req.file)
+  // res.json({ file: req.file });
+  res.end()
+});
 
 
 // @route GET /files
 // @desc  Display all files in JSON
 router.get('/files', (req, res) => {
-    gfs.files.find().toArray((err, files) => {
-      // Check if files
-      if (!files || files.length === 0) {
-        return res.status(404).json({
-          err: 'No files exist'
-        });
-      }
-      // Files exist
-      return res.json(files);
-    });
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      });
+    }
+    // Files exist
+    return res.json(files);
   });
+});
 
 
 // @route GET /Video/:filename
 // @desc Display Video
 router.get('/video/:filename', (req, res) => {
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-      // Check if file
-      if (!file || file.length === 0) {
-        return res.status(404).json({
-          err: 'No file exists'
-        });
-      }
-      // Check if video
-      if (file.contentType === 'video/mp4') {
-        // Read output to browser
-        const readstream = gfs.createReadStream(file.filename);
-        readstream.pipe(res);
-      } else {
-        res.status(404).json({
-          err: 'Not an video'
-        });
-      }
-    });
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+    // Check if video
+    if (file.contentType === 'video/mp4') {
+      // Read output to browser
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an video'
+      });
+    }
   });
+});
 
 
 // @route DELETE /files/:id
 // @desc  Delete file
 router.delete('/files/:id', (req, res) => {
-    gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
-      if (err) {
-        return res.status(404).json({ err: err });
-      }
-      res.end();
-    });
+  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+    res.end();
   });
+});
 
 
 module.exports = router

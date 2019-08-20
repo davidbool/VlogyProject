@@ -31,3 +31,8 @@
     transform: rotate(360deg);
   }
 }
+.video-cont{
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  grid-gap: 60px
+}
