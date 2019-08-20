@@ -7,6 +7,18 @@ const User = require('./Modules/UserSchema')
 const createFeed = require('./CreateFeed')
 
 
+
+router.put('/updateUser', (req, res) =>{
+  User.findOne({username : req.body.username}, function(err, doc){
+    doc.uploads.push({
+      videoId: req.body.filename,
+      likes: 0,
+      comments: []
+    })
+    doc.save(function(err){res.end()})
+  })
+})
+
 router.get('/users', (req, res) =>{ //gets all the users
   User.find({}, function(err, docs){
     res.send(docs)
@@ -51,14 +63,9 @@ conn.once('open', () => {
 
 // @route POST /upload
 // @desc  Uploads file to DB
-
-
-router.post('/upload', upload.single('file'), (req, res) => {['']
-    // res.json({ file: req.file });
-    res.end()
+router.post('/upload', upload.single('file'), (req, res) => {
+    res.send(req.file.filename)
   });
-
-
 
 // @route GET /files
 // @desc  Display all files in JSON

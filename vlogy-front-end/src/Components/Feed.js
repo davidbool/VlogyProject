@@ -13,7 +13,16 @@ class Feed extends Component {
     handleUploadFile = () => {
         const data = new FormData();
         data.append('file', this.state.file.current.files[0]);
-        axios.post('http://localhost:5000/upload', data)
+        axios.post('http://localhost:5000/upload', data).then(function (response) {
+            axios({
+                method: 'put',
+                url: 'http://localhost:5000/updateUser',
+                data: {
+                  filename: response.data,
+                  username: "String"
+                }
+              });
+          })
         console.log(this.state.file)
     }
     handleinput = (e) => {

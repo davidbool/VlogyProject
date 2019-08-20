@@ -32,7 +32,7 @@ class App extends Component {
     axios.post('http://localhost:5000/newUser', user)
     this.myData()
     console.log(this.state.data)
-
+  }
 
 
   UserExict = (login) => {
@@ -70,12 +70,12 @@ class App extends Component {
 
 
         </div>
-        <Route path="/feed" exact render={() => <Feed data={this.state.MovieData}  />} />
-      </Router>
+        <Route path="/feed" exact render={() => <Feed data={this.state.UserData}  />} />
       <div className="App" >
         <Landing UserExict={this.UserExict} newUser={this.newUser} />
 
       </div>
+      </Router>
     );
   }
 
