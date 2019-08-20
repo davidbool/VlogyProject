@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import Feed from './Components/Feed';
+import Landing from './Components/Landing'
 
 
 class App extends Component {
@@ -10,27 +11,46 @@ class App extends Component {
     super()
     this.state = {
       MovieData:[],
+      data: [],
+      UserData: []
 
     }
   }
 
 
-  // myData = async () => {
-  //   let data = await axios.get('http://localhost:8080/Vlogs')
-  //   data = data.data
-  //   this.setState({
-  //     data
-  //   })
-  // }
+  myData = async () => {
+    let data = await axios.get('http://localhost:5000/users')
+    data = data.data
+    this.setState({
+      data
+    })
+  }
 
 
 
-  // newClient = async (client) => {
-  //   axios.post('http://localhost:8080/Video', client)
+  newUser = async (user) => {
+    axios.post('http://localhost:5000/newUser', user)
+    this.myData()
+    console.log(this.state.data)
 
-  //   this.myData()
 
-  // }
+
+  UserExict = (login) => {
+    axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`).then((res)=> {
+      if (res.data[0] === undefined) {
+        alert('User not found')
+
+      } else {
+        let UserData = res.data[0]
+        this.setState({
+          UserData
+        }, function () {
+          console.log(this.state.UserData)
+        })
+      }
+    })
+  }
+
 
 
 
@@ -39,10 +59,6 @@ class App extends Component {
   // }
 
 
-  // updateDescription = async (user) => {
-  //    await axios.put(`http://localhost:8080/updateClient/${user.email}`, user)
-  //   this.myData()
-  // }
 
 
 
@@ -56,6 +72,10 @@ class App extends Component {
         </div>
         <Route path="/feed" exact render={() => <Feed data={this.state.MovieData}  />} />
       </Router>
+      <div className="App" >
+        <Landing UserExict={this.UserExict} newUser={this.newUser} />
+
+      </div>
     );
   }
 

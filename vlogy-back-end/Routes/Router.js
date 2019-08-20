@@ -6,6 +6,34 @@ const Grid = require('gridfs-stream');
 const User = require('./Modules/UserSchema')
 const createFeed = require('./CreateFeed')
 
+
+router.get('/users', (req, res) =>{ //gets all the users
+  User.find({}, function(err, docs){
+    res.send(docs)
+  })
+})
+
+router.get('/username/:username/password/:password', (req, res) =>{
+  console.log(req.params) //cheks if the exists
+  User.find({username: req.params.username, password: req.params.password}, function(err, docs){
+    res.send(docs)
+    console.log(docs)
+  })
+})
+
+
+router.post('/newUser', (req, res) => { //adds a new user
+    let data = req.body
+    let user = new User({
+      username: data.username,
+      password: data.password,
+      name: data.name,
+      DOB: data.DOB
+    })
+    user.save(function(err){res.end()})
+  });
+
+
 // Mongo URI
 const mongoURI = 'mongodb://localhost:27017/uploads';
 
@@ -23,11 +51,13 @@ conn.once('open', () => {
 
 // @route POST /upload
 // @desc  Uploads file to DB
-router.post('/upload', upload.single('file'), (req, res) => {
-console.log(req.file)
-  // res.json({ file: req.file });
-  res.end()
-});
+
+
+router.post('/upload', upload.single('file'), (req, res) => {['']
+    // res.json({ file: req.file });
+    res.end()
+  });
+
 
 
 // @route GET /files
