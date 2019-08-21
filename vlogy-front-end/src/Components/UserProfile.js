@@ -95,11 +95,11 @@ class UserProfile extends Component {
 
     }
 
-
     deleteuser = () => {
         localStorage.username = { 'username': localStorage.getItem("username") };
         localStorage.username = undefined
     }
+
 
     render() {
 
@@ -163,6 +163,6 @@ class UserProfile extends Component {
         );
     }
 
-}
 
+}
 export default UserProfile;
