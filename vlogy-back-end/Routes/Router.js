@@ -40,6 +40,7 @@ router.put('/uploadVideo', (req, res) =>{
     let date = new Date()
     doc.uploads.push({
       videoId: req.body.filename,
+      date: date,
       likes: 0,
       comments: []
     })
@@ -69,11 +70,10 @@ router.get('/feed', (req, res) =>{
   })
 })
 
+//cheks if the exists
 router.get('/username/:username/password/:password', (req, res) =>{
-  console.log(req.params) //cheks if the exists
   User.find({username: req.params.username, password: req.params.password}, function(err, docs){
     res.send(docs)
-    console.log(docs)
   })
 })
 
