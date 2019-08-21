@@ -13,7 +13,7 @@ class Feed extends Component {
 
     handleUploadFile = () => {
         const data = new FormData();
-        let username = this.props.data.username
+        let username = localStorage.getItem("username")
         data.append('file', this.state.file.current.files[0]);
         axios.post('http://localhost:5000/upload', data).then((response) => {
             axios({
@@ -27,6 +27,16 @@ class Feed extends Component {
         })
     }
 
+    getFeed = async () => {
+        let videos = await axios.get('http://localhost:5000/feed')
+        return videos.data
+    
+    }
+    componentDidMount = async () => {
+        let data = await this.getFeed()
+        this.setState({ data })
+    
+    }
   
     handleinput = (e) => {
         this.setState({ file: e.target.value })
@@ -36,8 +46,16 @@ class Feed extends Component {
         console.log(this.props.data.username)
     }
     
+    comment = (data) =>{
+        axios.put('http://localhost:5000/addComment', data)
+          .then( (response) => {
+            console.log(response)
+            this.componentDidMount()
+          })
+    }
     
     render() {
+        console.log(this.state.data)
         return (
             <div className='feed'>
                 <button onClick={this.whoConnect}>who Connect </button>
@@ -45,13 +63,13 @@ class Feed extends Component {
                 <div className='input'>
 
                     <input type='file' class="fas fa-video" ref={this.state.file} /> 
-                    {/* <input type='file' ref={this.state.file}></input> */}
+                   {/* <input type='file' ref={this.state.file}></input> */}
                     <button onClick={this.handleUploadFile} >upload</button>             
                       <div>
-                        <Videos data ={this.props.data} UserData={this.props.UserData} />
+                        <Videos data ={this.state.data} UserData={this.props.UserData} comment ={this.comment} />
                       </div>
 
-                </div>
+                </div> 
 
             </div>
 
