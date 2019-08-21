@@ -8,8 +8,19 @@ const createFeed = require('./CreateFeed')
 
 
 
-router.put('/updateUser', (req, res) =>{
-  User.findOne({username : req.body.username}, function(err, doc){
+router.put('/addComment', (req, res) =>{
+  User.findOne({username: req.body.username}, function(err, doc){
+    let newArr = [...doc.uploads]
+    let index = newArr.findIndex(x => x.videoId == req.body.filename)
+    newArr[index].comments.push(req.body.comment)
+    doc.uploads = []
+    newArr.forEach(v => doc.uploads.push(v))
+    doc.save(function(err){res.send(err)})
+  })
+})
+
+router.put('/uploadVideo', (req, res) =>{
+  User.findOne({username: req.body.username}, function(err, doc){
     doc.uploads.push({
       videoId: req.body.filename,
       likes: 0,

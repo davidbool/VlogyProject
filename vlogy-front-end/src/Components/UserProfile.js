@@ -9,9 +9,6 @@ class UserProfile extends Component {
         this.state = {
             username: '',
             password: '',
-
-
-
         }
     }
 
@@ -31,16 +28,11 @@ class UserProfile extends Component {
         })
     }
 
-
-
     UserExict = async () => {
         console.log('hello')
         let UserData = await this.props.UserExict({ username: this.state.username, password: this.state.password })
         console.log(UserData)
-
-
     }
-
 
 
     exit = () => {

@@ -23,7 +23,6 @@ class Feed extends Component {
                 }
               });
           })
-        console.log(this.state.file)
     }
     handleinput = (e) => {
         this.setState({ file: e.target.value })

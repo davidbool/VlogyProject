@@ -6,7 +6,6 @@ import Feed from './Components/Feed';
 import Landing from './Components/Landing'
 
 
-
 class App extends Component {
   constructor() {
     super()
