@@ -7,9 +7,25 @@ const User = require('./Modules/UserSchema')
 const createFeed = require('./CreateFeed')
 
 
+//get user by username
+router.get('/user/:username', (req,res) =>{
+  User.findOne({username: req.params.username}, (err, doc) =>{
+    res.send(doc)
+  })
+})
 
-router.put('/addComment', (req, res) =>{
-  User.findOne({username: req.body.username}, function(err, doc){
+//updates base user data
+router.put('/updateUser', (req, res) => {
+  User.findOne({username: req.body.username}, function(err,doc){
+    doc[req.body.prop] = req.body.data
+    doc.save(function(err){res.send(err)})
+  })
+})
+
+//input: username, videoId, comment 
+//save the comment in the user DB in the uploads array
+router.put('/addComment', (req, res) =>{ 
+  User.findOne({name: req.body.name}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.filename)
     newArr[index].comments.push(req.body.comment)
@@ -21,6 +37,7 @@ router.put('/addComment', (req, res) =>{
 
 router.put('/uploadVideo', (req, res) =>{
   User.findOne({username: req.body.username}, function(err, doc){
+    let date = new Date()
     doc.uploads.push({
       videoId: req.body.filename,
       likes: 0,
@@ -33,6 +50,22 @@ router.put('/uploadVideo', (req, res) =>{
 router.get('/users', (req, res) =>{ //gets all the users
   User.find({}, function(err, docs){
     res.send(docs)
+  })
+})
+router.get('/feed', (req, res) =>{
+  User.find({}, function(err, docs){
+    let videos = []
+    for(let d of docs){
+      for(let v of d.uploads){
+        videos.push({
+          id: v.videoId,
+          user: d.name,
+          likes: v.likes,
+          comments: v.comments
+        })
+      }
+    }
+    res.send(videos)
   })
 })
 

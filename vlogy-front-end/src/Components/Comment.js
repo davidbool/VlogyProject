@@ -1,29 +1,32 @@
 import React, { Component } from 'react'
-
 class Comment extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             comment: '',
-            box: []
+            box: this.props.c
         }
 
     }
 
     post = (event) => {
         this.setState({ comment: event.target.value })
-
     }
 
     comment = () => {
-        let newBox = [...this.state.box]
-        newBox.push(this.state.comment)
-        this.setState({
-            box: newBox
-        })
+        let data = {
+            name: this.props.d.user,
+            filename: this.props.d.id,
+            comment: this.state.comment
+        }
+        console.log(data)
+        this.props.comment(data)
+        // let newBox = [...this.state.box]
+        // newBox.push(this.state.comment)
+        // this.setState({
+        //     box: newBox
+        // })
     }
-
-
 
     render() {
 

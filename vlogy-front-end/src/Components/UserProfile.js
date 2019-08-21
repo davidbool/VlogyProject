@@ -32,8 +32,8 @@ class UserProfile extends Component {
     }
 
     UserExict = async () => {
-        console.log('hello')
         let UserData = await this.props.UserExict({ username: this.state.username, password: this.state.password })
+        console.log('hello')
         console.log(UserData)
     }
 
@@ -117,6 +117,7 @@ class UserProfile extends Component {
                         </div>}
                 </div>
             </Router >
+
         );
     }
 

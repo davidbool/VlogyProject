@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import Feed from './Components/Feed';
 import Landing from './Components/Landing'
 
 
@@ -12,18 +11,19 @@ class App extends Component {
     this.state = {
       MovieData: [],
       data: [],
-      UserData: {}
+      UserData: {},
+      allData: []
 
     }
   }
 
-  // myData = async () => {
-  //   let data = await axios.get('http://localhost:5000/users')
-  //   data = data.data
-  //   this.setState({
-  //     data
-  //   })
-  // }
+  myData = async () => {
+    let data = await axios.get('http://localhost:5000/users')
+    let allData = data.data
+    this.setState({
+      allData
+    })
+  }
 
 
   newUser = async (user) => {
@@ -51,19 +51,9 @@ class App extends Component {
     return res.data[0]
   }
 
-//   getFeed = async () => {
-//     let filname = await axios.get('http://localhost:5000/files')
-//     console.log(filname)
-//     return filname.data.map(d => d.filename)
-
-// }
-
-// componentDidMount = async () => {
-//     let data = await this.getFeed()
-//     this.setState({ data })
-
-// }
-
+componentDidMount = async () => {
+    this.myData()
+}
 
   deleteuser=()=>{
     this.setState({
@@ -76,13 +66,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App" >
-          <div className='main-links'>
-      
-          
-          </div>
-         <div>
-          <Route path="/feed" exact render={() => <Feed />} />
-        </div>
+
         <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
