@@ -38,7 +38,8 @@ router.put('/uploadVideo', (req, res) =>{
       videoId: req.body.filename,
       date: date,
       likes: 0,
-      comments: []
+      comments: [],
+      
     })
     doc.save(function(err){res.end()})
   })
