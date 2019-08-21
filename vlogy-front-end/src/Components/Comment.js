@@ -22,10 +22,6 @@ class Comment extends Component {
             box: newBox
         })
     }
-    delete = () => {
-        this.state.box.splice(0,1)
-
-    }
 
 
 
@@ -33,7 +29,7 @@ class Comment extends Component {
 
         return (
             <div>
-                {this.state.box.map(c => <span> <div>{c}</div> <button onClick={this.state}>x</button> </span>)}
+                {this.state.box.map(c => <span> <div>{c}</div> </span>)}
                 <input type='text' value={this.state.comment} onChange={this.post} placeholder='comment' />
                 <button onClick={this.comment}>post</button>
 

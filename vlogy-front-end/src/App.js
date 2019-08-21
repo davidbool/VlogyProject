@@ -51,18 +51,18 @@ class App extends Component {
     return res.data[0]
   }
 
-  getFeed = async () => {
-    let filname = await axios.get('http://localhost:5000/files')
-    console.log(filname)
-    return filname.data.map(d => d.filename)
+//   getFeed = async () => {
+//     let filname = await axios.get('http://localhost:5000/files')
+//     console.log(filname)
+//     return filname.data.map(d => d.filename)
 
-}
+// }
 
-componentDidMount = async () => {
-    let data = await this.getFeed()
-    this.setState({ data })
+// componentDidMount = async () => {
+//     let data = await this.getFeed()
+//     this.setState({ data })
 
-}
+// }
 
 
   deleteuser=()=>{
@@ -81,7 +81,7 @@ componentDidMount = async () => {
           
           </div>
          <div>
-          <Route path="/feed" exact render={() => <Feed UserData={this.state.UserData} data={this.state.data}  />} />
+          <Route path="/feed" exact render={() => <Feed />} />
         </div>
         <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
