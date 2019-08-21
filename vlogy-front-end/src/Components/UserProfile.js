@@ -40,15 +40,15 @@ class UserProfile extends Component {
         let about = v.target.value
         this.setState({
             about
-        },function(){
+        }, function () {
             console.log(this.state.about)
         })
     }
 
-    exit = () => {
-        alert(`${this.props.UserData.username} you are Loging-Out`)
-        this.props.deleteuser()
-    }
+    // exit = () => {
+    //     alert(`${this.props.UserData.username} you are Loging-Out`)
+    //     this.props.deleteuser()
+    // }
 
     render() {
 
@@ -58,9 +58,15 @@ class UserProfile extends Component {
             <div className='userprofile'>
                 {this.props.UserData.username === undefined ?
 
-<div>
-                        <Link to='/'><i class="fas fa-arrow-circle-left"></i></Link>
-                        <div>Page not found.</div> </div>
+                    <div class="login">
+                        <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="User name" id="username" />
+                        <input type="password" value={this.state.password} onChange={this.handlePassword} placeholder="Password" id="password" />
+
+
+                        <Link to="userprofile"><button onClick={this.UserExict} className="submit" type='submit'> LogIn <i class="far fa-hand-spock"></i></button></Link>
+                        <div className="oasswordorusername"> Password or username is incorrect</div>
+                        <Link className="signupbutton" to="/signup"><div className="sign">Sign-Up</div></Link>
+                    </div>
                     :
                     <div>
                         {/* <Link to='/feed'>Feed</Link> */}
@@ -80,7 +86,7 @@ class UserProfile extends Component {
                             <div onClick={this.updateprofile}><i class="far fa-caret-square-up"></i></div>
 
                         </form>
-                    </div> }
+                    </div>}
 
             </div>
                     </Router>
