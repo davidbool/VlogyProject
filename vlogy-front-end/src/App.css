@@ -11,10 +11,10 @@
 }
 
 .login {
-  background-color: rgba(2, 217, 255, 0.767);
+  background-color: rgba(255, 255, 255, 0.411);
   border: 1px solid #ffffff;
   border-radius: 6px;
-  height: 130px;
+  height: 180px;
   margin: 20px auto 0;
   width: 298px;
 }
@@ -26,8 +26,8 @@
 }
 
 .signup {
-  border: 1px solid #ffffff;
-  border-radius: 6px;
+  /* border: 3px solid #ffffff31;
+  border-radius: 6px; */
   height: 500px;
   margin: 20px auto 0;
   width: 298px;
@@ -48,6 +48,12 @@
   top: 0%;
   right: 0%
 }
+.sign{
+  margin-top: 9vh;
+  font-size: 3vh;
+  top:0%
+  
+}
 
 .logOut:hover {
   color: red
@@ -67,7 +73,7 @@
 }
 
 .fa-arrow-circle-left {
-  color: blue;
+  color: rgba(100, 0, 0, 0.493);
   font-size: 30px
 }
 
@@ -136,7 +142,7 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 body {
   padding: 0 100px 100px;
-  background-color: #cde !important;
+  background-color: rgba(207, 151, 233, 0.541) !important;
 }
 
 h1#header {
@@ -290,4 +296,11 @@ article:hover a {
 .videos {
   border: 5px solid rgb(225, 0, 255);
   border-radius: 100px;
+}
+
+.oasswordorusername{
+  margin-left:2vh;
+  margin-top: 4vh;
+  color: tomato;
+  font-size: 17px
 }
