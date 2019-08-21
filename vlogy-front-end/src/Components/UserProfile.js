@@ -11,7 +11,7 @@ class UserProfile extends Component {
             username: '',
             password: '',
             about: '',
-            showlogout: false
+            showlogout: false,
             UserData: []
         }
     }
@@ -74,7 +74,6 @@ class UserProfile extends Component {
 
 
     }
-    render() {
 
     render() {
 console.log(this.props.UserData.username)
@@ -129,6 +128,6 @@ console.log(this.props.UserData.username)
         );
     }
 
-}
 
+}
 export default UserProfile;
