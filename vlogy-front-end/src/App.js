@@ -59,18 +59,20 @@ class App extends Component {
         UserData:{}
     })}
 
+  
+
   render() {
     return (
       <Router>
         <div className="App" >
           <div className='main-links'>
-            <Link to='/feed'>Feed</Link>
-            <Link to='/'>Landing</Link>
+      
+          
           </div>
          <div>
-          <Route path="/feed" exact render={() => <Feed data={this.state.UserData}  />} />
+          <Route path="/feed" exact render={() => <Feed UserData={this.state.UserData} data={this.state.UserData}  />} />
         </div>
-        <Landing deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 

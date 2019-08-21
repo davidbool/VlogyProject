@@ -7,8 +7,6 @@ const User = require('./Modules/UserSchema')
 const createFeed = require('./CreateFeed')
 
 
-
-
 //updates base user data
 router.put('/updateUser', (req, res) => {
   User.findOne({username: req.body.username}, function(err,doc){

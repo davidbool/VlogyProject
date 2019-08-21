@@ -24,8 +24,6 @@ class Feed extends Component {
                 }
             });
         })
-
-        console.log(this.props.data.username +"upload video" )
     }
     handleinput = (e) => {
         this.setState({ file: e.target.value })
@@ -39,17 +37,21 @@ class Feed extends Component {
     render() {
         return (
             <div className='feed'>
+<
                 <button onClick={this.whoConnect}>who Connect</button>
                 <div className='input'>
-                    <input type='file' ref={this.state.file}></input>
+                    <input type='file' class="fas fa-video" ref={this.state.file} /> 
+                    {/* <input type='file' ref={this.state.file}></input> */}
                     <button onClick={this.handleUploadFile} >upload</button>
+                   
                     <div>
-                        <Videos />
+                        <Videos UserData={this.props.UserData} />
 
                     </div>
+                    </div>
 
-                </div>
             </div>
+
         )
     }
 
