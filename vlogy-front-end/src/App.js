@@ -63,7 +63,7 @@ componentDidMount = async () => {
     return (
       <Router>
         <div className="App" >      
-        <Landing allData={this.state.AllData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <Landing allData={this.state.allData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 

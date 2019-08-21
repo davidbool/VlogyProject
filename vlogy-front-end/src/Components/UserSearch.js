@@ -8,11 +8,13 @@ class UserSearch extends Component {
         super()
         this.state = {
             comment: '',
-            follow: false
+            follow: false,
+           
         }
 
     }
 
+   
 
     followbutton = () => {
         if (this.state.follow == true) {

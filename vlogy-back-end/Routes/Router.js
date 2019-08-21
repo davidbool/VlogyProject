@@ -25,10 +25,11 @@ router.put('/updateUser', (req, res) => {
 //input: username, videoId, comment 
 //save the comment in the user DB in the uploads array
 router.put('/addComment', (req, res) =>{ 
-  User.findOne({name: req.body.name}, function(err, doc){
+  User.findOne({username: req.body.username}, function(err, doc){
+    console.log(doc.uploads)
     let newArr = [...doc.uploads]
-    let index = newArr.findIndex(x => x.videoId == req.body.filename)
-    newArr[index].comments.push(req.body.comment)
+    let index = newArr.findIndex(x => x.videoId == req.body.videoId)
+    newArr[index].comments.push(req.body.comments)
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
     doc.save(function(err){res.send(err)})
