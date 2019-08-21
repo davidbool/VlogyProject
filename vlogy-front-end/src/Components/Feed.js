@@ -16,19 +16,18 @@ class Feed extends Component {
         axios.post('http://localhost:5000/upload', data).then(function (response) {
             axios({
                 method: 'put',
-                url: 'http://localhost:5000/updateUser',
+                url: 'http://localhost:5000/uploadVideo',
                 data: {
                   filename: response.data,
-                  username: "String"
+                  username: "c"
                 }
               });
           })
     }
     handleinput = (e) => {
         this.setState({ file: e.target.value })
-
     }
-
+   
     render() {
         return (
             <div className='feed'>
