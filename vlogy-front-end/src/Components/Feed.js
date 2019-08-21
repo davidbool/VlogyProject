@@ -37,7 +37,6 @@ class Feed extends Component {
     render() {
         return (
             <div className='feed'>
-<
                 <button onClick={this.whoConnect}>who Connect</button>
                 <div className='input'>
                     <input type='file' class="fas fa-video" ref={this.state.file} /> 
