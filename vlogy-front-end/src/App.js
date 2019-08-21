@@ -6,7 +6,6 @@ import Feed from './Components/Feed';
 import Landing from './Components/Landing'
 
 
-
 class App extends Component {
   constructor() {
     super()
@@ -17,7 +16,6 @@ class App extends Component {
 
     }
   }
-
 
   myData = async () => {
     let data = await axios.get('http://localhost:5000/users')
@@ -77,10 +75,8 @@ class App extends Component {
         <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
-    );
-    
+    ); 
   }
-
 }
 
 export default App;

@@ -7,42 +7,68 @@ const User = require('./Modules/UserSchema')
 const createFeed = require('./CreateFeed')
 
 
+//updates base user data
+router.put('/updateUser', (req, res) => {
+  User.findOne({username: req.body.username}, function(err,doc){
+    doc[req.body.prop] = req.body.data
+    doc.save(function(err){res.send(err)})
+  })
+})
 
+//input: username, videoId, comment 
+//save the comment in the user DB in the uploads array
+router.put('/addComment', (req, res) =>{ 
+  User.findOne({username: req.body.username}, function(err, doc){
+    let newArr = [...doc.uploads]
+    let index = newArr.findIndex(x => x.videoId == req.body.filename)
+    newArr[index].comments.push(req.body.comment)
+    doc.uploads = []
+    newArr.forEach(v => doc.uploads.push(v))
+    doc.save(function(err){res.send(err)})
+  })
+})
 
-
-router.put('/updateUser', (req, res) =>{
-  User.findOne({username : req.body.username}, function(err, doc){
+//creates the videodata object in the user DB uploads array
+//should work with the upload-post route
+router.put('/uploadVideo', (req, res) =>{
+  User.findOne({username: req.body.username}, function(err, doc){
     doc.uploads.push({
       videoId: req.body.filename,
+      date: date,
       likes: 0,
-      comments: []
+      comments: [],
+      
     })
     doc.save(function(err){res.end()})
   })
 })
 
-router.get('/users', (req, res) =>{ //gets all the users
+//gets all the users
+router.get('/users', (req, res) =>{
   User.find({}, function(err, docs){
     res.send(docs)
   })
 })
 
+
+//logIn route
+//returns the user data
 router.get('/username/:username/password/:password', (req, res) =>{
-  console.log(req.params) //cheks if the exists
-  User.find({username: req.params.username, password: req.params.password}, function(err, docs){
+   User.find({username: req.params.username, password: req.params.password}, function(err, docs){
     res.send(docs)
-    console.log(docs)
   })
 })
 
-
+//creates a new user in the DB
 router.post('/newUser', (req, res) => { //adds a new user
     let data = req.body
     let user = new User({
       username: data.username,
       password: data.password,
       name: data.name,
-      DOB: data.DOB
+      DOB: data.DOB,
+      profilePic: "",
+      about: ""
     })
     user.save(function(err){res.end()})
   });

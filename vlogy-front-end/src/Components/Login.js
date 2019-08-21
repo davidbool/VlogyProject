@@ -9,9 +9,6 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-
-
-
         }
     }
 
@@ -31,44 +28,22 @@ class Login extends Component {
         })
     }
 
-
-
     UserExict = async () => {
-        console.log('hello')
         let UserData = await this.props.UserExict({ username: this.state.username, password: this.state.password })
         console.log(UserData)
-      
-
     }
 
    
-
     render() {
-
-
         return (
-
             <div >
-                
-
-
                 <div class="login">
                     <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="User name" id="username" />
                     <input type="password" value={this.state.password} onChange={this.handlePassword} placeholder="Password" id="password" />
                    <Link to="userprofile"><button onClick={this.UserExict} className="submit" type='submit'> LogIn <i class="far fa-hand-spock"></i></button></Link> 
-
-
-
                     <Link className="signupbutton" to="/signup"><div className="sign">Sign-Up</div></Link>
-
                 </div>
-
-
-
-
-
             </div>
-
 
         )
     }

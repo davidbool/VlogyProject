@@ -11,8 +11,6 @@ class UserProfile extends Component {
             username: '',
             password: '',
             about: ''
-
-
         }
     }
 
@@ -32,13 +30,10 @@ class UserProfile extends Component {
         })
     }
 
-
     UserExict = async () => {
         console.log('hello')
         let UserData = await this.props.UserExict({ username: this.state.username, password: this.state.password })
         console.log(UserData)
-
-
     }
 
     handleAbout = (v) => {
@@ -49,7 +44,6 @@ class UserProfile extends Component {
             console.log(this.state.about)
         })
     }
-
 
     exit = () => {
         alert(`${this.props.UserData.username} you are Loging-Out`)
@@ -83,13 +77,7 @@ class UserProfile extends Component {
                             <div onClick={this.updateprofile}><i class="far fa-caret-square-up"></i></div>
 
                         </form>
-                    </div>}
-
-
-
-
-
-
+                    </div> }
 
             </div>
         );
