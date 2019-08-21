@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import App from '../App'
 import axios from 'axios'
 import Videos from './Videos'
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+
 class Feed extends Component {
     constructor() {
         super()
         this.state = {
             file: React.createRef(),
-            data: []
+            data: [],
+            UserData: {}
         }
     }
 
@@ -27,6 +32,7 @@ class Feed extends Component {
         })
     }
 
+
     getFeed = async () => {
         let videos = await axios.get('http://localhost:5000/feed')
         return videos.data
@@ -43,7 +49,8 @@ class Feed extends Component {
     }
 
     whoConnect = () => {
-        console.log(this.props.data.username)
+        console.log(localStorage.getItem("username"))
+
     }
     
     comment = (data) =>{
@@ -54,13 +61,28 @@ class Feed extends Component {
           })
     }
     
+
     render() {
         console.log(this.state.data)
         return (
-            <div className='feed'>
-                <button onClick={this.whoConnect}>who Connect </button>
+            <Router>
+                <div className='feed'>
+                    <div className='profile-link'>
+                        <Link to='/userprofile'>my profile</Link>
+                    </div>
+                    <button onClick={this.whoConnect}>who Connect </button>
 
-                <div className='input'>
+                    <div className='input'>
+
+
+                        <input type='file' class="fas fa-video" ref={this.state.file} />
+                        <button onClick={this.handleUploadFile} >upload</button>
+                        <div>
+
+                            <Videos data={this.state.data} UserData={this.state.UserData} />
+                        </div>
+
+                    </div>
 
                     <input type='file' class="fas fa-video" ref={this.state.file} /> 
                    {/* <input type='file' ref={this.state.file}></input> */}
@@ -71,8 +93,9 @@ class Feed extends Component {
 
                 </div> 
 
-            </div>
+                </div>
 
+            </Router>
         )
     }
 

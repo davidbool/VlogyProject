@@ -35,24 +35,19 @@ router.put('/addComment', (req, res) =>{
   })
 })
 
-//creates the videodata object in the user DB uploads array
-//should work with the upload-post route
 router.put('/uploadVideo', (req, res) =>{
   User.findOne({username: req.body.username}, function(err, doc){
     let date = new Date()
     doc.uploads.push({
       videoId: req.body.filename,
-      date: date,
       likes: 0,
-      comments: [],
-      
+      comments: []
     })
     doc.save(function(err){res.end()})
   })
 })
 
-//gets all the users
-router.get('/users', (req, res) =>{
+router.get('/users', (req, res) =>{ //gets all the users
   User.find({}, function(err, docs){
     res.send(docs)
   })
@@ -74,25 +69,22 @@ router.get('/feed', (req, res) =>{
   })
 })
 
-
-//logIn route
-//returns the user data
 router.get('/username/:username/password/:password', (req, res) =>{
-   User.find({username: req.params.username, password: req.params.password}, function(err, docs){
+  console.log(req.params) //cheks if the exists
+  User.find({username: req.params.username, password: req.params.password}, function(err, docs){
     res.send(docs)
+    console.log(docs)
   })
 })
 
-//creates a new user in the DB
+
 router.post('/newUser', (req, res) => { //adds a new user
     let data = req.body
     let user = new User({
       username: data.username,
       password: data.password,
       name: data.name,
-      DOB: data.DOB,
-      profilePic: "",
-      about: ""
+      DOB: data.DOB
     })
     user.save(function(err){res.end()})
   });

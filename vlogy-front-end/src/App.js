@@ -51,12 +51,9 @@ class App extends Component {
     return res.data[0]
   }
 
-
-
 componentDidMount = async () => {
     this.myData()
 }
-
 
   deleteuser=()=>{
     this.setState({
@@ -69,6 +66,7 @@ componentDidMount = async () => {
     return (
       <Router>
         <div className="App" >
+
         <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
