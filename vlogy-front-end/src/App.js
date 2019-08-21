@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-
 import Landing from './Components/Landing';
-
-
 
 class App extends Component {
   constructor() {
@@ -14,16 +11,15 @@ class App extends Component {
       MovieData: [],
       data: [],
       UserData: {},
-      AllData:[]
-
+      allData: []
     }
   }
 
   myData = async () => {
     let data = await axios.get('http://localhost:5000/users')
-    let AllData = data.data
+    let allData = data.data
     this.setState({
-      AllData
+      allData
     })
   }
 
@@ -53,20 +49,9 @@ class App extends Component {
     return res.data[0]
   }
 
-  getFeed = async () => {
-    let filname = await axios.get('http://localhost:5000/files')
-    console.log(filname)
-    return filname.data.map(d => d.filename)
-
-}
-
 componentDidMount = async () => {
-    let data = await this.getFeed()
-    this.setState({ data })
     this.myData()
-
 }
-
 
   deleteuser=()=>{
     this.setState({
@@ -77,9 +62,8 @@ componentDidMount = async () => {
   render() {
     return (
       <Router>
-        <div className="App" >
-      
-        <Landing AllData={this.state.AllData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <div className="App" >      
+        <Landing allData={this.state.AllData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 

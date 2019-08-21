@@ -8,18 +8,17 @@ class Videos extends Component {
         this.state = {
             comment: '',
         }
-
     }
-
-
 
 
     post = (event) => {
         this.setState({ comment: event.target.value })
-
-
     }
 
+
+    exit = () => {
+        alert(`${localStorage.getItem("username")} you are Loging-Out`)
+    }
 
 
     render() {
@@ -97,25 +96,27 @@ class Videos extends Component {
             </div> */}
 
 
-
-
-                <a href='/' > <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
-                    <i class="fas fa-door-open"></i>
-
-                </div></a>
-                <div className='video-cont'>
-
-
-
-                    {this.props.data.map(d =>
-                        <div>
-                            <video className="videos" width="300" height="200" controls>
-                                <source src={`http://localhost:5000/video/${d}`} />
-                            </video>
-                            <Comment />
+            <a href='/' >
+     <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
+                            <i class="fas fa-door-open"></i>
                         </div>
-                    )}
-                </div>
+             </a>
+            <div className='video-cont'>
+
+
+                
+                {this.props.data.map(d =>
+                    <div>
+                        <h3>{d.user}</h3>
+                        <video className="videos" width="300" height="200" controls>
+                            <source src={`http://localhost:5000/video/${d.id}`} />
+                        </video>
+                        <div>{d.likes}</div>
+                        <Comment c = {d.comments} d ={d} comment ={this.props.comment}/>
+                    </div>
+                )}
+            </div>
+
             </div>
         )
     }

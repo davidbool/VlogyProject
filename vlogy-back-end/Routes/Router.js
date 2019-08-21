@@ -7,6 +7,13 @@ const User = require('./Modules/UserSchema')
 const createFeed = require('./CreateFeed')
 
 
+//get user by username
+router.get('/user/:username', (req,res) =>{
+  User.findOne({username: req.params.username}, (err, doc) =>{
+    res.send(doc)
+  })
+})
+
 //updates base user data
 router.put('/updateUser', (req, res) => {
   User.findOne({username: req.body.username}, function(err,doc){
@@ -18,7 +25,7 @@ router.put('/updateUser', (req, res) => {
 //input: username, videoId, comment 
 //save the comment in the user DB in the uploads array
 router.put('/addComment', (req, res) =>{ 
-  User.findOne({username: req.body.username}, function(err, doc){
+  User.findOne({name: req.body.name}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.filename)
     newArr[index].comments.push(req.body.comment)
@@ -28,47 +35,56 @@ router.put('/addComment', (req, res) =>{
   })
 })
 
-//creates the videodata object in the user DB uploads array
-//should work with the upload-post route
 router.put('/uploadVideo', (req, res) =>{
   User.findOne({username: req.body.username}, function(err, doc){
+    let date = new Date()
     doc.uploads.push({
       videoId: req.body.filename,
-      date: date,
       likes: 0,
-      comments: [],
-      
+      comments: []
     })
     doc.save(function(err){res.end()})
   })
 })
 
-//gets all the users
-router.get('/users', (req, res) =>{
+router.get('/users', (req, res) =>{ //gets all the users
   User.find({}, function(err, docs){
     res.send(docs)
   })
 })
-
-
-//logIn route
-//returns the user data
-router.get('/username/:username/password/:password', (req, res) =>{
-   User.find({username: req.params.username, password: req.params.password}, function(err, docs){
-    res.send(docs)
+router.get('/feed', (req, res) =>{
+  User.find({}, function(err, docs){
+    let videos = []
+    for(let d of docs){
+      for(let v of d.uploads){
+        videos.push({
+          id: v.videoId,
+          user: d.name,
+          likes: v.likes,
+          comments: v.comments
+        })
+      }
+    }
+    res.send(videos)
   })
 })
 
-//creates a new user in the DB
+router.get('/username/:username/password/:password', (req, res) =>{
+  console.log(req.params) //cheks if the exists
+  User.find({username: req.params.username, password: req.params.password}, function(err, docs){
+    res.send(docs)
+    console.log(docs)
+  })
+})
+
+
 router.post('/newUser', (req, res) => { //adds a new user
     let data = req.body
     let user = new User({
       username: data.username,
       password: data.password,
       name: data.name,
-      DOB: data.DOB,
-      profilePic: "",
-      about: ""
+      DOB: data.DOB
     })
     user.save(function(err){res.end()})
   });
