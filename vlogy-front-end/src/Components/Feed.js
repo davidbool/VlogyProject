@@ -29,15 +29,13 @@ class Feed extends Component {
     }
     handleinput = (e) => {
         this.setState({ file: e.target.value })
-
     }
 
     whoConnect = () => {
         console.log(this.props.data.username)
-
-
     }
-
+    
+    
     render() {
         return (
             <div className='feed'>
