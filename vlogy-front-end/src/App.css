@@ -120,7 +120,7 @@
 .aboutmyself[type=text] {
   /* width: 500px;
  height: 100px; */
- 
+ box-shadow: 7px 4px 24px -1px rgba(0,0,0,0.75);
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -299,6 +299,12 @@ article:hover a {
   border-radius: 100px;
 }
 
+.videoss {
+  
+  border: 1px solid #1A95D8;
+   border-radius: 34px;
+  box-shadow: 7px 4px 24px -11px rgba(0,0,0,0.75);
+}
 .oasswordorusername {
   margin-left: 2vh;
   margin-top: 4vh;

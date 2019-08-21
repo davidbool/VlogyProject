@@ -150,7 +150,7 @@ class UserProfile extends Component {
                         <div>
                             {this.state.UserData.map(d =>
                                 <div>
-                                    <video className="videos" width="400" height="300" controls>
+                                    <video className="videoss" width="400" height="300" controls>
                                         <source src={`http://localhost:5000/video/${d}`} />
                                     </video>
 
