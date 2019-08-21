@@ -6,7 +6,8 @@ class Feed extends Component {
     constructor() {
         super()
         this.state = {
-            file: React.createRef()
+            file: React.createRef(),
+            data: []
         }
     }
 
@@ -25,6 +26,8 @@ class Feed extends Component {
             });
         })
     }
+
+  
     handleinput = (e) => {
         this.setState({ file: e.target.value })
     }
@@ -37,17 +40,18 @@ class Feed extends Component {
     render() {
         return (
             <div className='feed'>
-                <button onClick={this.whoConnect}>who Connect</button>
+                <button onClick={this.whoConnect}>who Connect </button>
+
                 <div className='input'>
+
                     <input type='file' class="fas fa-video" ref={this.state.file} /> 
                     {/* <input type='file' ref={this.state.file}></input> */}
-                    <button onClick={this.handleUploadFile} >upload</button>
-                   
-                    <div>
-                        <Videos UserData={this.props.UserData} />
+                    <button onClick={this.handleUploadFile} >upload</button>             
+                      <div>
+                        <Videos data ={this.props.data} UserData={this.props.UserData} />
+                      </div>
 
-                    </div>
-                    </div>
+                </div>
 
             </div>
 

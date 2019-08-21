@@ -53,9 +53,10 @@ class UserProfile extends Component {
     render() {
 
         return (
+            <Router>
+
             <div className='userprofile'>
                 {this.props.UserData.username === undefined ?
-
 
                     <div class="login">
                         <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="User name" id="username" />
@@ -68,7 +69,8 @@ class UserProfile extends Component {
                     </div>
                     :
                     <div>
-                        <Link to='/feed'>Feed</Link>
+                        {/* <Link to='/feed'>Feed</Link> */}
+                        <a href="/feed">feed</a>
 
                         <div className='usernameprofile'> <i class="fas fa-user-alt"></i>
 
@@ -87,6 +89,7 @@ class UserProfile extends Component {
                     </div>}
 
             </div>
+                    </Router>
         );
     }
 

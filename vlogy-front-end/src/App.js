@@ -17,13 +17,13 @@ class App extends Component {
     }
   }
 
-  myData = async () => {
-    let data = await axios.get('http://localhost:5000/users')
-    data = data.data
-    this.setState({
-      data
-    })
-  }
+  // myData = async () => {
+  //   let data = await axios.get('http://localhost:5000/users')
+  //   data = data.data
+  //   this.setState({
+  //     data
+  //   })
+  // }
 
 
   newUser = async (user) => {
@@ -39,6 +39,8 @@ class App extends Component {
 
       } else {
         let UserData = res.data[0]
+        localStorage.setItem("username", UserData.username)
+        localStorage.setItem("password", UserData.password)
         this.setState({
           UserData
         }, function () {
@@ -49,10 +51,19 @@ class App extends Component {
     return res.data[0]
   }
 
+  getFeed = async () => {
+    let filname = await axios.get('http://localhost:5000/files')
+    console.log(filname)
+    return filname.data.map(d => d.filename)
 
-  componentDidMount = async () => {
-    this.myData()
-  }
+}
+
+componentDidMount = async () => {
+    let data = await this.getFeed()
+    this.setState({ data })
+
+}
+
 
   deleteuser=()=>{
     this.setState({
@@ -70,7 +81,7 @@ class App extends Component {
           
           </div>
          <div>
-          <Route path="/feed" exact render={() => <Feed UserData={this.state.UserData} data={this.state.UserData}  />} />
+          <Route path="/feed" exact render={() => <Feed UserData={this.state.UserData} data={this.state.data}  />} />
         </div>
         <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
