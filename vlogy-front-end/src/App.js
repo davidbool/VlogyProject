@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import Feed from './Components/Feed';
-import Landing from './Components/Landing'
+
+import Landing from './Components/Landing';
+
 
 
 class App extends Component {
@@ -12,18 +13,19 @@ class App extends Component {
     this.state = {
       MovieData: [],
       data: [],
-      UserData: {}
+      UserData: {},
+      AllData:[]
 
     }
   }
 
-  // myData = async () => {
-  //   let data = await axios.get('http://localhost:5000/users')
-  //   data = data.data
-  //   this.setState({
-  //     data
-  //   })
-  // }
+  myData = async () => {
+    let data = await axios.get('http://localhost:5000/users')
+    let AllData = data.data
+    this.setState({
+      AllData
+    })
+  }
 
 
   newUser = async (user) => {
@@ -35,7 +37,7 @@ class App extends Component {
   UserExict = async(login) => {
     let res = await axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`)
       if (res.data[0] === undefined) {
-        alert('User not found')
+        console.log('User not found')
 
       } else {
         let UserData = res.data[0]
@@ -61,6 +63,7 @@ class App extends Component {
 componentDidMount = async () => {
     let data = await this.getFeed()
     this.setState({ data })
+    this.myData()
 
 }
 
@@ -71,19 +74,12 @@ componentDidMount = async () => {
     })}
 
   
-
   render() {
     return (
       <Router>
         <div className="App" >
-          <div className='main-links'>
       
-          
-          </div>
-         <div>
-          <Route path="/feed" exact render={() => <Feed UserData={this.state.UserData} data={this.state.data}  />} />
-        </div>
-        <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <Landing AllData={this.state.AllData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 

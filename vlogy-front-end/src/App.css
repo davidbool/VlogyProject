@@ -35,9 +35,9 @@
 
 .signupbutton {
   position: absolute;
-  top: 0%;
+  top: 16%;
   left: 0%;
-  margin-top: 150px;
+  margin-top: 20vh;
   margin-left: 48%
 }
 
@@ -48,11 +48,11 @@
   top: 0%;
   right: 0%
 }
-.sign{
-  margin-top: 9vh;
+
+.sign {
+  margin-top: 15vh;
   font-size: 3vh;
-  top:0%
-  
+  top: 0%
 }
 
 .logOut:hover {
@@ -104,13 +104,13 @@
   margin-left: 450px
 }
 
-.signupbutton {
+/* .signupbutton {
   position: absolute;
   top: 0%;
-  left: 0%;
+  
   margin-top: 150px;
   margin-left: 48%
-}
+} */
 
 .main-links {
   display: grid;
@@ -120,7 +120,7 @@
 .aboutmyself[type=text] {
   /* width: 500px;
  height: 100px; */
-  width: 100%;
+  width: 100vh;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -142,7 +142,7 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 body {
   padding: 0 100px 100px;
-  background-color: rgba(207, 151, 233, 0.541) !important;
+  background-color: rgba(115, 89, 177, 0.541) !important;
 }
 
 h1#header {
@@ -298,9 +298,112 @@ article:hover a {
   border-radius: 100px;
 }
 
-.oasswordorusername{
-  margin-left:2vh;
+.oasswordorusername {
+  margin-left: 2vh;
   margin-top: 4vh;
   color: tomato;
   font-size: 17px
 }
+
+.logiingout {
+  height: 10vh;
+  width: 36vh;
+  position: absolute;
+  top: 70%;
+  margin-left: 55vh;
+  background-color: rgba(255, 0, 0, 0.493);
+  color: rgb(255, 255, 255);
+  font-size: 18px
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.oasswordorusernamet {
+  margin-left: 2vh;
+  margin-top: 4vh;
+  font-size: 17px;
+  color: green
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.664);
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.searchcontainer {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #fdfdfd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.inputcon {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  position: absolute;
+  right: 0%;
+  margin-right: 7%;
+}
+
+.searchcontainer:hover {
+  background-color: #ebe5e5a9
+}
+
+.aboutcontainer {
+  text-align: inherit;
+  position: absolute;
+  top: 22%;
+  right: 34%;
+  background-color: rgba(131, 118, 118, 0.288);
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  height: 14vh;
+  width: 55vh;
+}
+
+.fa-user-plus {
+font-size: 5vh;
+color: rgb(54, 185, 42)
+}
+
+.fa-user-minus {
+  font-size: 5vh;
+  color: rgb(255, 47, 47)
+  }

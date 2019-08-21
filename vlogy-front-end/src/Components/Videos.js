@@ -12,7 +12,7 @@ class Videos extends Component {
     }
 
 
- 
+
 
     post = (event) => {
         this.setState({ comment: event.target.value })
@@ -20,10 +20,7 @@ class Videos extends Component {
 
     }
 
-    exit = () => {
-        alert(`${this.props.UserData.username} you are Loging-Out`)
-       
-    }
+
 
     render() {
 
@@ -33,7 +30,7 @@ class Videos extends Component {
             <div>
 
 
-{/* 
+                {/* 
 <div className='feed'>
                     <h1 id="header" class="text-primary">Vlogy Feed</h1>
 
@@ -102,23 +99,23 @@ class Videos extends Component {
 
 
 
-<Link to='/' > <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
-                            <i class="fas fa-door-open"></i>
+                <a href='/' > <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
+                    <i class="fas fa-door-open"></i>
 
-                        </div></Link>
-            <div className='video-cont'>
+                </div></a>
+                <div className='video-cont'>
 
 
-                
-                {this.props.data.map(d =>
-                    <div>
-                        <video className="videos" width="300" height="200" controls>
-                            <source src={`http://localhost:5000/video/${d}`} />
-                        </video>
-                        <Comment />
-                    </div>
-                )}
-            </div>
+
+                    {this.props.data.map(d =>
+                        <div>
+                            <video className="videos" width="300" height="200" controls>
+                                <source src={`http://localhost:5000/video/${d}`} />
+                            </video>
+                            <Comment />
+                        </div>
+                    )}
+                </div>
             </div>
         )
     }
