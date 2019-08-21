@@ -31,8 +31,8 @@ class UserProfile extends Component {
     }
 
     UserExict = async () => {
-        console.log('hello')
         let UserData = await this.props.UserExict({ username: this.state.username, password: this.state.password })
+        console.log('hello')
         console.log(UserData)
     }
 
@@ -65,7 +65,7 @@ class UserProfile extends Component {
 
                         <Link to="userprofile"><button onClick={this.UserExict} className="submit" type='submit'> LogIn <i class="far fa-hand-spock"></i></button></Link>
                         <div className="oasswordorusername"> Password or username is incorrect</div>
-                        <Link className="signupbutton" to="/signup"><div className="sign">Sign-Up</div></Link>
+                        <a className="signupbutton" href="/signup"><div className="sign">Sign-Up</div></a>
                     </div>
                     :
                     <div>
@@ -76,10 +76,10 @@ class UserProfile extends Component {
 
                             {this.props.UserData.username}</div>
 
-                        <Link to='/' > <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
+                        <a href='/' > <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
                             <i class="fas fa-door-open"></i>
 
-                        </div></Link>
+                        </div></a>
                         <form >
                             <label for="fname">About MySelf</label>
                             <input value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" />
@@ -87,6 +87,10 @@ class UserProfile extends Component {
 
                         </form>
                     </div>}
+
+                    <div>
+                    
+                    </div>
 
             </div>
                     </Router>
