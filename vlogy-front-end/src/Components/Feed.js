@@ -18,11 +18,11 @@ class Feed extends Component {
                 method: 'put',
                 url: 'http://localhost:5000/updateUser',
                 data: {
-                  filename: response.data,
-                  username: "String"
+                    filename: response.data,
+                    username: "String"
                 }
-              });
-          })
+            });
+        })
         console.log(this.state.file)
     }
     handleinput = (e) => {
@@ -33,17 +33,31 @@ class Feed extends Component {
     render() {
         return (
             <div className='feed'>
+
+
+
+
+
                 <div className='input'>
-                    <input type='file' ref={this.state.file}></input>
+
+
+                    <input type='file' class="fas fa-video" ref={this.state.file} /> 
+                    {/* <input type='file' ref={this.state.file}></input> */}
                     <button onClick={this.handleUploadFile} >upload</button>
+                   
                     <div>
-                        <Videos />
-                        
+                        <Videos UserData={this.props.UserData} />
+
                     </div>
 
 
                 </div>
+
             </div>
+
+
+
+
         )
     }
 

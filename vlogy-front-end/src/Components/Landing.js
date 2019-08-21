@@ -24,7 +24,7 @@ console.log(this.props.UserData)
                 <Router>
                     <Route path="/" exact render={() => <Login UserData={this.props.UserData}  UserExict={this.props.UserExict} />} />
                     <Route path="/signup" exact render={() => <Signup newUser={this.props.newUser} />} />
-                    <Route path='/userprofile' exact render={() => <UserProfile deleteuser={this.props.deleteuser}  UserExict={this.props.UserExict}  UserData={this.props.UserData}/>} /> 
+                    <Route path='/userprofile' exact render={() => <UserProfile updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser}  UserExict={this.props.UserExict}  UserData={this.props.UserData}/>} /> 
                 </Router>
 
 
