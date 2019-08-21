@@ -28,7 +28,7 @@ class Landing extends Component {
 
     }
 
-
+   
 
 
     render() {
@@ -63,12 +63,12 @@ class Landing extends Component {
 
                     <Route path="/usersearch" exact render={() =>
                         this.state.searchPut === '' ?
-                            data.map(r => <UserSearch username={r.username} following={r.following} followers={r.followers} />) :
-                            searchdata.map(r => <UserSearch username={r.username} following={r.following} followers={r.followers} />)
+                            data.map(r => <UserSearch allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />) :
+                            searchdata.map(r => <UserSearch updateUser={this.props.updateUser} allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />)
                     } />
 
-                    <Route path='/userprofile' exact render={() => <UserProfile updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
-                    <Route path='/user/:username' exact render={({ match }) => <UserPage match={match} />} />
+                    <Route path='/userprofile' exact render={() => <UserProfile updateUser={this.props.updateUser} allData={this.props.allData} updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
+                    <Route path='/user/:username' exact render={({ match }) => <UserPage match={match} UserData={this.props.UserData} />} />
                 </Router>
 
             </div>

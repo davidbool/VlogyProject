@@ -15,15 +15,39 @@ class UserProfile extends Component {
             showlogout: false,
             UserData: [],
             img: '',
-            editimg: false
+            editimg: false,
+            editingtwo: false
         }
     }
+
+    updateUser = () => {
+        let datas = this.props.updateUser({ data: this.state.img, prop: 'profilePic', username: localStorage.getItem("username") })
+        console.log(datas)
+    }
+
+    updateabout = () => {
+        let datas = this.props.updateUser({ data: this.state.about, prop: 'about', username: localStorage.getItem("username") })
+        console.log(datas)
+    }
+
 
     handleeditimg = () => {
 
         this.setState({
-            editimg: !this.state.editimg
+            img: '',
+            editimg: !this.state.editimg,
+
         })
+
+    }
+    handleeditimgtwo = () => {
+
+        this.setState({
+            
+            editingtwo: !this.state.editingtwo,
+
+        })
+
     }
 
 
@@ -39,6 +63,8 @@ class UserProfile extends Component {
         let img = u.target.value
         this.setState({
             img
+        }, function () {
+            this.updateUser()
         })
     }
 
@@ -67,8 +93,9 @@ class UserProfile extends Component {
         this.setState({
             about
         }, function () {
-            console.log(this.state.about)
+            this.updateabout()
         })
+                
     }
     who = () => {
         let MyVideo = 'uploads.videoId'
@@ -102,48 +129,38 @@ class UserProfile extends Component {
     }
 
     render() {
-
-
-        console.log(this.props.UserData.username)
+        console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about))
+        console.log(this.state.UserData)
+        let userPic = this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
+        console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.following)[0])
         return (
 
             < Router >
                 <div className='userprofile'>
-                    {/* {localStorage.getItem("username") === undefined ?
 
-                        <div class="login">
-                            <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="User name" id="username" />
-                            <input type="password" value={this.state.password} onChange={this.handlePassword} placeholder="Password" id="password" />
-
-
-                            <button onClick={this.UserExict} className="submit" type='submit'> LogIn <i class="far fa-hand-spock"></i></button>
-                            
-                            <div className="oasswordorusername"> Password or username is incorrect</div>
-                            <a className="signupbutton" href="/signup"><span className="sign">Sign-Up</span></a>
-                        </div>
-                        : */}
                     <div>
 
-
-
-                        {this.state.img === '' || this.state.editimg === true ?
+                        {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)[0] === undefined ?
                             <div><input className="imginput" value={this.state.img} onChange={this.handleimg} placeholder="put image url" /> <div className='usernameprofile'> <i class="fas fa-user-alt"> </i>
+                                {localStorage.getItem("username")}</div> </div>
+                            :
+                            <div className='usernameprofile'> <img className="usernameimg" src={userPic} /> <div onClick={this.handleeditimg} ><i class="fas fa-user-edit"></i></div>  {localStorage.getItem("username")}  </div>}
+                        <div>{this.state.editimg ? <input className="imginput" value={this.state.img} onChange={this.handleimg} placeholder="put image url" /> : null}</div>
 
-                                {localStorage.getItem("username")}</div> </div> :
-                            <div className='usernameprofile'> <img className="usernameimg" src={this.state.img} /> <i onClick={this.handleeditimg} class="fas fa-user-edit"></i> {localStorage.getItem("username")}  </div>}
 
-                        {/* <div className='usernameprofile'> <i class="fas fa-user-alt"></i>
+                        {/* {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(f => <div className="followersprofile"><div>Following: {f.following} </div><div>Followers: {f.followers}</div></div>)} */}
 
-                            {localStorage.getItem("username")}</div> */}
 
-                        <a href='/' > <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
+                        <a href='/' > <div onClick={this.deleteuser} className="logOut"><i class="fas fa-walking"></i>
                             <i class="fas fa-door-open"></i>
 
                         </div></a>
                         <form >
                             <label for="fname">About MySelf</label>
-                            <input value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" />
-                            {/* <div onClick={this.updateprofile}><i class="far fa-caret-square-up"></i></div> */}
+                            {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about)=== undefined || this.state.editingtwo? <input  value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" />:
+                             <div type="text" className="aboutmyself" name="fname">{this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about)}<i onClick={this.handleeditimgtwo} className="fas fa-pencil-alt"></i> </div>}
+                            
+
 
                         </form>
 

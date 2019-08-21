@@ -98,6 +98,7 @@
 }
 
 .video-cont {
+  display: inline-block;
   display: grid;
   grid-template-columns: repeat(1, 3fr);
   grid-gap: 60px;
@@ -120,7 +121,7 @@
 .aboutmyself[type=text] {
   /* width: 500px;
  height: 100px; */
- box-shadow: 7px 4px 24px -1px rgba(0,0,0,0.75);
+  box-shadow: 7px 4px 24px -1px rgba(0, 0, 0, 0.75);
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -295,16 +296,22 @@ article:hover a {
 }
 
 .videos {
+  width: 300px;
+  height: 200px
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 60px;
+  margin-left: 450px;
   border: 5px solid rgb(225, 0, 255);
-  border-radius: 100px;
+  border-radius: 100px; */
 }
 
 .videoss {
-  
   border: 1px solid #1A95D8;
-   border-radius: 34px;
-  box-shadow: 7px 4px 24px -11px rgba(0,0,0,0.75);
+  border-radius: 34px;
+  box-shadow: 7px 4px 24px -11px rgba(0, 0, 0, 0.75);
 }
+
 .oasswordorusername {
   margin-left: 2vh;
   margin-top: 4vh;
@@ -467,24 +474,37 @@ li a:hover {
   height: 170px;
   border: 5px solid #1C6EA4;
   border-radius: 100px;
-  /* position: absolute;
-  top: 5%;
-  right: 10% */
-
+  box-shadow: -4px -7px 65px -20px rgba(45, 44, 46, 1);
 }
 
-.imginput{text-align: center;
+.imginput {
+  text-align: center;
   border: 3px solid #1C6EA4;
-border-radius: 40px;
+  border-radius: 40px;
   position: absolute;
   top: 16%;
-  right:49%;
+  right: 49%;
 }
 
-.videos{
-   position: absolute;
+.videos {
+  position: absolute;
   top: 30%;
-  right:49%; 
-  
+  right: 49%;
+}
 
+.followersprofile {
+  position: absolute;
+  top: 15%;
+  right: 43%;
+}
+
+.fa-pencil-alt {
+  float: right;
+  color: rgb(223, 219, 6);
+  cursor: pointer;
+  font-size: 2vw
+}
+
+.fa-pencil-alt:active {
+  transform: translateY(4px);
 }
