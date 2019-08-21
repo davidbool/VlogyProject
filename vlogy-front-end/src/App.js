@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import Landing from './Components/Landing'
-
+import Landing from './Components/Landing';
 
 class App extends Component {
   constructor() {
@@ -13,7 +12,6 @@ class App extends Component {
       data: [],
       UserData: {},
       allData: []
-
     }
   }
 
@@ -35,7 +33,7 @@ class App extends Component {
   UserExict = async(login) => {
     let res = await axios.get(`http://localhost:5000/username/${login.username}/password/${login.password}`)
       if (res.data[0] === undefined) {
-        alert('User not found')
+        console.log('User not found')
 
       } else {
         let UserData = res.data[0]
@@ -61,13 +59,11 @@ componentDidMount = async () => {
     })}
 
   
-
   render() {
     return (
       <Router>
-        <div className="App" >
-
-        <Landing  newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <div className="App" >      
+        <Landing allData={this.state.AllData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 

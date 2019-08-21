@@ -11,6 +11,7 @@ class UserProfile extends Component {
             username: '',
             password: '',
             about: '',
+            showlogout: false
             UserData: []
         }
     }
@@ -23,6 +24,12 @@ class UserProfile extends Component {
         })
     }
 
+    handleshow = () => {
+
+        this.setState({
+            showlogout: !this.state.showlogout
+        })
+    }
 
     handlePassword = (p) => {
         let password = p.target.value
@@ -69,6 +76,8 @@ class UserProfile extends Component {
     }
     render() {
 
+    render() {
+console.log(this.props.UserData.username)
         return (
 
             < Router >
@@ -117,7 +126,6 @@ class UserProfile extends Component {
                         </div>}
                 </div>
             </Router >
-
         );
     }
 

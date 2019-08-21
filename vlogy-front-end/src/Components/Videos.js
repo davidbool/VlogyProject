@@ -10,13 +10,16 @@ class Videos extends Component {
         }
     }
 
+
     post = (event) => {
         this.setState({ comment: event.target.value })
     }
 
+
     exit = () => {
         alert(`${localStorage.getItem("username")} you are Loging-Out`)
     }
+
 
     render() {
 
@@ -26,7 +29,7 @@ class Videos extends Component {
             <div>
 
 
-{/* 
+                {/* 
 <div className='feed'>
                     <h1 id="header" class="text-primary">Vlogy Feed</h1>
 
@@ -93,8 +96,6 @@ class Videos extends Component {
             </div> */}
 
 
-
-
             <a href='/' >
      <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
                             <i class="fas fa-door-open"></i>
@@ -115,6 +116,7 @@ class Videos extends Component {
                     </div>
                 )}
             </div>
+
             </div>
         )
     }
