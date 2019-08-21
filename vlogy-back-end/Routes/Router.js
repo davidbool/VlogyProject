@@ -24,7 +24,8 @@ router.put('/uploadVideo', (req, res) =>{
     doc.uploads.push({
       videoId: req.body.filename,
       likes: 0,
-      comments: []
+      comments: [],
+      
     })
     doc.save(function(err){res.end()})
   })
@@ -37,7 +38,7 @@ router.get('/users', (req, res) =>{ //gets all the users
 })
 
 router.get('/username/:username/password/:password', (req, res) =>{
-  console.log(req.params) //cheks if the exists
+  console.log(req.params) //checks if the exists
   User.find({username: req.params.username, password: req.params.password}, function(err, docs){
     res.send(docs)
     console.log(docs)
