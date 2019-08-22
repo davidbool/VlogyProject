@@ -108,7 +108,7 @@ class Videos extends Component {
                 {this.props.data.map(d =>
                     <div>
                         <h3>{d.user}</h3>
-                        <video className="videos" width="300" height="200" controls>
+                        <video className="videos"  controls>
                             <source src={`http://localhost:5000/video/${d.id}`} />
                         </video>
                         <div>{d.likes}</div>

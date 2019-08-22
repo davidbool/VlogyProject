@@ -15,6 +15,25 @@ class App extends Component {
     }
   }
 
+  updateUser = (data) =>{
+    // console.log(data)
+    axios.put('http://localhost:5000/updateUser', data)
+      .then( (response) => {
+        console.log(response)
+        this.myData()
+      })
+}
+
+  updateUserVideo = (data) => {
+    console.log(data)
+    axios.put('http://localhost:5000/updateUser/video', data)
+      .then( (response) => {
+        console.log(response)
+        this.myData()
+      })
+  }
+
+
   myData = async () => {
     let data = await axios.get('http://localhost:5000/users')
     let allData = data.data
@@ -63,7 +82,7 @@ componentDidMount = async () => {
     return (
       <Router>
         <div className="App" >      
-        <Landing allData={this.state.allData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <Landing updateUser={this.updateUser} updateUserVideo={this.updateUserVideo} allData={this.state.allData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 
