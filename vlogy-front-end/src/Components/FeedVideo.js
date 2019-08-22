@@ -38,12 +38,14 @@ class Videos extends Component {
 
     render() {
         let vid = this.props.vid
+        let touser = `/user/${vid.user.username}`
        let UserData = this.props.user
         return (
 
             <div className='video-cont'>
                     <div>
-                        <h3>{vid.user.name}</h3>
+                    <h3>{vid.user.name} {localStorage.getItem("username") === vid.user.username ? <a href='/userprofile'><img className="usernameimg2" src={vid.user.profilePic}/></a>:<a href={touser}><img className="usernameimg2" src={vid.user.profilePic}/></a>} </h3> 
+
                         <video className="videoss" width="400" height="300" controls>
                             <source src={`http://localhost:5000/video/${vid.id}`} />
                         </video>
@@ -54,6 +56,8 @@ class Videos extends Component {
                 <button onClick={this.commentfunction}>post</button>
                         </div>
                     </div>
+                    {/* <Comment c = {vid.comments} d ={d} comment ={this.props.comment}/> */}
+                </div>
             </div>
 
         )

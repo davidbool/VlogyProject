@@ -46,33 +46,36 @@ class Feed extends Component {
     }
 
 
-    showupload =() =>{
+    showupload = () => {
         this.setState({
-            showupload : !this.state.showupload
+            showupload: !this.state.showupload
         })
     }
 
     getFeed = async () => {
         let videos = await axios.get('http://localhost:5000/feed')
-        this.setState({ data : videos.data })
-    
+        let feed = videos.data.filter(o => o.user.username !== localStorage.getItem("username"))
+        console.log(feed)
+        this.setState({ data: feed })
+
     }
     componentDidMount = async () => {
         this.getFeed()
     }
-  
+
     handleinput = (e) => {
         this.setState({ file: e.target.value })
     }
 
-    
-    comment = (data) =>{
+
+    comment = (data) => {
         axios.put('http://localhost:5000/addComment', data)
-          .then( (response) => {
-            console.log(response)
-            this.getFeed()
-          })
+            .then((response) => {
+                console.log(response)
+                this.getFeed()
+            })
     }
+
     deleteComment = (data) =>{
         console.log(data)
         axios({
@@ -89,21 +92,22 @@ class Feed extends Component {
         this.getFeed()
       })
     }
+    
     render() {
         return (
             <Router>
                 <div className='feed'>
-
-                 <a href='/' >
-     <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
+                <span className="myfeed">Feed</span>
+                    <a href='/' >
+                        <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
                             <i class="fas fa-door-open"></i>
                         </div>
-                   </a>
+                    </a>
 
                     <div className='input'>
 
 
-                    {this.state.showupload ?
+                        {this.state.showupload ?
                             <div><div onClick={this.showupload} ><li class="fas fa-video"></li></div>
                                 <div className="uploadcontainer">
                                     <input className="inputupload" type='file' ref={this.state.file} />
@@ -116,7 +120,7 @@ class Feed extends Component {
 
                     </div>
 
-                </div> 
+                </div>
 
             </Router>
         )
