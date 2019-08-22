@@ -47,7 +47,6 @@ class VideoUserP extends Component {
                         <div onClick={this.likes} className="container">
                             <i class="fas fa-heart"></i>
                             {this.state.likes ? this.props.d.likes + 1 : this.props.d.likes}
-
                         </div>
                     </div>
                     <video className="videoss" width="400" height="300" controls>

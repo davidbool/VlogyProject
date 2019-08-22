@@ -25,10 +25,8 @@ class App extends Component {
 }
 
   updateUserVideo = (data) => {
-    console.log(data)
     axios.put('http://localhost:5000/updateUser/video', data)
       .then( (response) => {
-        console.log(response)
         this.myData()
       })
   }
