@@ -153,8 +153,13 @@ router.get('/video/:filename', (req, res) => {
 
 // @route DELETE /files/:id
 // @desc  Delete file
-router.delete('/files/:id', (req, res) => {
-  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+router.delete('/files/:id/:username', (req, res) => {
+  User.findOne({username: req.params.username}, (err, doc) =>{
+    let i = doc.uploads.findIndex(v => v.videoId == req.params.id )
+    doc.uploads.splice(i,1)
+    doc.save()
+  })
+  gfs.remove({ filename: req.params.id, root: 'uploads' }, (err, gridStore) => {
     if (err) {
       return res.status(404).json({ err: err });
     }
@@ -162,5 +167,17 @@ router.delete('/files/:id', (req, res) => {
   });
 });
 
+//delete comments from the User BD
+router.delete('/comments', (req, res) =>{
+  User.findOne({name: req.body.name}, function(err, doc){
+    let newArr = [...doc.uploads]
+    let index = newArr.findIndex(x => x.videoId == req.body.videoId)
+    let i = newArr[index].comments.findIndex(c => c == req.body.comment)
+    newArr[index].comments.splice(i,1)
+    doc.uploads = []
+    newArr.forEach(v => doc.uploads.push(v))
+    doc.save(function(err){res.send(err)})
+  })
+})
 
 module.exports = router

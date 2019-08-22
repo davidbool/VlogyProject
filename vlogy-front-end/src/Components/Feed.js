@@ -48,10 +48,6 @@ class Feed extends Component {
         this.setState({ file: e.target.value })
     }
 
-    whoConnect = () => {
-        console.log(localStorage.getItem("username"))
-
-    }
     
     comment = (data) =>{
         axios.put('http://localhost:5000/addComment', data)
@@ -67,10 +63,6 @@ class Feed extends Component {
         return (
             <Router>
                 <div className='feed'>
-                    <div className='profile-link'>
-                        <Link to='/userprofile'>my profile</Link>
-                    </div>
-                    <button onClick={this.whoConnect}>who Connect </button>
 
                     <div className='input'>
 
@@ -83,13 +75,6 @@ class Feed extends Component {
                         </div>
 
                     </div>
-
-                    <input type='file' class="fas fa-video" ref={this.state.file} /> 
-                   {/* <input type='file' ref={this.state.file}></input> */}
-                    <button onClick={this.handleUploadFile} >upload</button>             
-                      <div>
-                        <Videos data ={this.state.data} UserData={this.props.UserData} comment ={this.comment} />
-                      </div>
 
                 </div> 
 

@@ -38,7 +38,7 @@ class UserPage extends Component {
 
 
                     <div className='usernameprofile'> <i class="fas fa-user-alt"></i>
-
+                    <h2>{this.state.userdata.name}</h2>
                         </div>
                     
                     <form >
