@@ -7,36 +7,76 @@ import UserProfile from './UserProfile';
 import UserSearch from './UserSearch';
 import Feed from './Feed'
 import UserPage from './UserPage';
-import NavBar from './NavBar'
+
 
 class Landing extends Component {
     constructor() {
         super()
         this.state = {
-          
+            searchPut: '',
+
         }
     }
 
-  render() {        
+
+    searchPutChange = (event) => {
+        const input = event.target.value
+        this.setState({
+            searchPut: input,
+
+        })
+
+    }
+
+   
+
+
+    render() {
+        console.log(this.props.UserData.username)
+        let data = this.props.allData
+        let searchdata = data.filter(r => r.username.toLowerCase().includes(this.state.searchPut))
+
         return (
 
             <div >
+
+                <div>
+
+                    <ul>
+                    {localStorage.getItem("username") === 'undefined'? <li><a class="active" href="/">Feed</a></li>:<li><a class="active" href="/feed">Feed</a></li>}
+                        {localStorage.getItem("username") === 'undefined'? null:<li><a href="/userprofile">My Profile</a></li>}
+                        
+                        {localStorage.getItem("username") === 'undefined' ? <button className="inputcon" type="submit"><i class="fa fa-search"></i></button> : <a href="/usersearch"><button className="inputcon" type="submit"><i class="fa fa-search"></i></button></a>}
+
+                        <input value={this.state.searchPut} onChange={this.searchPutChange} className="searchcontainer" type="text" placeholder="Search.." name="search" />
+
+                    </ul>
+
+                </div>
+
                 <Router>
-                <NavBar />
-                   
-                <Route path="/feed" exact render={() => <Feed />} />
-                    <Route path="/" exact render={() => <Login UserData={this.props.UserData}  UserExict={this.props.UserExict} />} />
+
+
+                    <Route path="/feed" exact render={() => <Feed />} />
+                    <Route path="/" exact render={() => <Login UserData={this.props.UserData} UserExict={this.props.UserExict} />} />
                     <Route path="/signup" exact render={() => <Signup newUser={this.props.newUser} />} />
-                    <Route path='/userprofile' exact render={() => <UserProfile updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser}  UserExict={this.props.UserExict}  UserData={this.props.UserData}/>} />
-                    <Route path='/user/:username' exact render ={ ({match}) => <UserPage match={match} />} />
+
+                    <Route path="/usersearch" exact render={() =>
+                        this.state.searchPut === '' ?
+                            data.map(r => <UserSearch allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />) :
+                            searchdata.map(r => <UserSearch updateUser={this.props.updateUser} allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />)
+                    } />
+
+                    <Route path='/userprofile' exact render={() => <UserProfile updateUser={this.props.updateUser} allData={this.props.allData} updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
+                    <Route path='/user/:username' exact render={({ match }) => <UserPage updateUser={this.props.updateUser} updateUserVideo={this.props.updateUserVideo} match={match} UserData={this.props.UserData} />} />
                 </Router>
-    
+
             </div>
 
 
-                )
-            }
-        }
-        
-        export default Landing
-        
+        )
+    }
+}
+
+export default Landing
+

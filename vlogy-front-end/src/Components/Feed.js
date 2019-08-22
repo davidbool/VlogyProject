@@ -64,6 +64,7 @@ class Feed extends Component {
             <Router>
                 <div className='feed'>
 
+
                     <div className='input'>
 
 
@@ -71,7 +72,7 @@ class Feed extends Component {
                         <button onClick={this.handleUploadFile} >upload</button>
                         <div>
 
-                            <Videos data={this.state.data} UserData={this.state.UserData} />
+                            <Videos comment= {this.comment} data={this.state.data} UserData={this.state.UserData} />
                         </div>
 
                     </div>

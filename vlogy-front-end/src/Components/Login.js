@@ -14,6 +14,12 @@ class Login extends Component {
     }
 
 
+    handleshow = () => {
+        this.setState({
+            show: true
+        })
+    }
+
     handleUserName = (u) => {
         let username = u.target.value
         this.setState({
@@ -45,8 +51,9 @@ class Login extends Component {
         window.location.href = '/userprofile'
     }
 
-   
+
     render() {
+        console.log(this.props.UserData)
         return (
             <div >
                 <div class="login">
@@ -57,6 +64,7 @@ class Login extends Component {
                     {this.state.show?
                      <div className="oasswordorusername"> Password or username is incorrect</div>
                     : <div className="oasswordorusernamet"> type your user name and password</div>} 
+
                     <a className="signupbutton" href="/signup"><span className="sign">Sign-Up</span></a>
                 </div>
             </div>

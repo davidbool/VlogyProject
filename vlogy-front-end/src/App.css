@@ -98,6 +98,7 @@
 }
 
 .video-cont {
+  display: inline-block;
   display: grid;
   grid-template-columns: repeat(1, 3fr);
   grid-gap: 60px;
@@ -120,7 +121,8 @@
 .aboutmyself[type=text] {
   /* width: 500px;
  height: 100px; */
-  width: 100vh;
+  box-shadow: 7px 4px 24px -1px rgba(0, 0, 0, 0.75);
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -294,8 +296,21 @@ article:hover a {
 }
 
 .videos {
+  width: 300px;
+  height: 200px
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 60px;
+  margin-left: 450px;
   border: 5px solid rgb(225, 0, 255);
-  border-radius: 100px;
+  border-radius: 100px; */
+}
+
+.videoss {
+  border: 1px solid #1A95D8;
+  border-radius: 34px;
+  box-shadow: 7px 4px 24px -11px rgba(0, 0, 0, 0.75);
+  margin: 1vw
 }
 
 .oasswordorusername {
@@ -324,6 +339,50 @@ article:hover a {
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  height: 17vw;
+  width: 40%;
+  position: absolute;
+  right: 16vw;
+  margin: 2.6vw
+  
+}
+
+.card2:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.card3:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card3 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  height: 17vw;
+  width: 20%;
+  position: absolute;
+  left: 10%;
+  margin: 2.6vw
+  
+}
+
+
+.card4:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card4 {
+ 
+  position: absolute;
+  right: 20%;
+  margin: 10vw
+  
 }
 
 .container {
@@ -399,11 +458,161 @@ li a:hover {
 }
 
 .fa-user-plus {
-font-size: 5vh;
-color: rgb(54, 185, 42)
+  font-size: 5vh;
+  color: rgb(54, 185, 42)
 }
 
 .fa-user-minus {
   font-size: 5vh;
   color: rgb(255, 47, 47)
-  }
+}
+
+.tip {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  background: transparent;
+  border: 10px solid rgb(255, 255, 255);
+}
+
+.tip-left {
+  top: 10px;
+  left: -25px;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.dialogbox .body {
+  position: relative;
+  max-width: 300px;
+  height: auto;
+  margin: 20px 10px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.671);
+  border-radius: 3px;
+  border: 5px solid rgb(255, 255, 255);
+}
+
+.body .message {
+  min-height: 30px;
+  border-radius: 3px;
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #0000008c;
+}
+
+.fa-trash-alt {
+  position: absolute;
+  right: 38%;
+  top: 43%;
+  font-size: 30px;
+}
+
+.comments {
+  border: #111
+}
+
+.usernameimg {
+  width: 170px;
+  height: 170px;
+  border: 5px solid #1C6EA4;
+  border-radius: 100px;
+  box-shadow: -4px -7px 65px -20px rgba(45, 44, 46, 1);
+}
+
+.imginput {
+  text-align: center;
+  border: 3px solid #1C6EA4;
+  border-radius: 40px;
+  position: absolute;
+  top: 16%;
+  right: 49%;
+}
+
+.videos {
+  position: absolute;
+  top: 30%;
+  right: 49%;
+}
+
+.followersprofile {
+  position: absolute;
+  top: 15%;
+  right: 43%;
+}
+
+.fa-pencil-alt {
+  float: right;
+  color: rgb(223, 219, 6);
+  cursor: pointer;
+  font-size: 2vw
+}
+
+.fa-pencil-alt:active {
+  transform: translateY(4px);
+}
+
+.uploadcontainer {
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  right: 10%;
+  height: 5vw;
+  width: 17vw;
+  background-color: #111111;
+  border: 6px solid rgb(0, 0, 0);
+  /* border-radius: 40px; */
+  box-shadow: 7px 4px 24px -1px rgba(255, 255, 255, 0.75);
+}
+
+.fa-video {
+  font-size: 7vw;
+  color: pink;
+  position: absolute;
+  top: 17%;
+  right: 10%;
+}
+
+.fa-video:active {
+  transform: translateY(4px);
+}
+
+.uploadbutton {
+  position: absolute;
+  right: 3vw;
+  top: 1.8vw;
+  color: rgb(248, 246, 246);
+  background-color: #111;
+  border: 1px solid pink;
+  border-radius: 40px;
+}
+
+.inputupload {
+  display: inline-block;
+  color: rgb(248, 246, 246);
+  background-color: transparent;
+}
+
+.uploadbutton:hover {
+  background-color: pink;
+  color: #111
+}
+
+.fa-user-edit:active {
+  transform: translateY(4px);
+}
+
+.fa-user-edit:hover {
+  color: floralwhite
+}
+
+.fa-heart{
+  color:rgb(255, 38, 0);
+  font-size: 4vw
+}
+
+.fa-heart:active {
+  transform: translateY(9px);
+}
