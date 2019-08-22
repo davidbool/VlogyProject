@@ -126,12 +126,12 @@ class UserProfile extends Component {
         this.setState({ UserData: movies })
     }
 
-    deleteVideo = (videoId) =>{
+    deleteVideo = (videoId) => {
         let username = localStorage.getItem("username")
         axios({
             method: 'delete',
             url: `http://localhost:5000/files/${videoId}/${username}`,
-        }).then((response) =>{
+        }).then((response) => {
             console.log(response)
             this.getvideo()
         })
@@ -139,7 +139,7 @@ class UserProfile extends Component {
 
     componentDidMount = () => {
         this.getvideo()
-        
+
         // return this.state.UserData
     }
 
@@ -155,7 +155,7 @@ class UserProfile extends Component {
                     filename: response.data,
                     username: username
                 }
-            }).then((response) =>{
+            }).then((response) => {
                 this.setState({
                     file: React.createRef(),
                     showupload: false
@@ -218,12 +218,9 @@ class UserProfile extends Component {
                         <div>
                             {this.state.UserData.map(d =>
                                 <div>
-                                     <div className="card2">
-                                        <div className="container">
-                                            hello
-                                        </div>
+                                    <div onClick={this.deleteVideo}><i class="fas fa-trash"></i>
                                     </div>
-                                    <Video d ={d} delete = {this.deleteVideo} />
+                                    <Video userdata={this.state.UserData} d={d} delete={this.deleteVideo} />
                                 </div>
                             )}
 

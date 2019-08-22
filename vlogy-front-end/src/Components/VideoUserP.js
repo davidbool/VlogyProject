@@ -12,7 +12,7 @@ class VideoUserP extends Component {
             timeclick: 0
         }
     }
-
+    
 
     postLike = () => {
         if (this.state.like == 0) {
@@ -84,6 +84,7 @@ class VideoUserP extends Component {
                         <div onClick={this.postLike} className="container">
                             <i class="fas fa-heart"></i>
                             {this.state.likes ? this.props.d.likes : this.props.d.likes}
+
                         </div>
                         {/* <div><button onClick={this.unlike}>unlike</button>
 

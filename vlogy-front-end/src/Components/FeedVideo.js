@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Comment from './Comment'
+import FeedComment from './FeedComment'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 class Videos extends Component {
     constructor() {
@@ -14,36 +14,50 @@ class Videos extends Component {
         this.setState({ comment: event.target.value })
 
     }
-    // commentfunction = () =>{
-    //     let data ={
-    //         username:
-    //         videoId: 
-    //         comment: this.state.comment
-    //     }
-    //     this.props.comment(this.state.comment)
-    // }
+    commentfunction = () =>{
+        let data ={
+            username: this.props.vid.user.username,
+            videoId: this.props.vid.id,
+            comment: this.state.comment
+        }
+        this.props.comment(data)
+        this.setState({
+            comment: ""
+        })
+    }
+    like = () =>{
+        let vid = this.props.vid
+        let data ={
+            username: vid.user.username,
+            videoId: vid.id,
+            prop: 'likes',
+            data: vid.likes +1
+        }
+        this.props.likeVid(data)
+    }
 
     render() {
-       let vid = this.props.vid
+        let vid = this.props.vid
+        let touser = `/user/${vid.user.username}`
        let UserData = this.props.user
         return (
 
             <div className='video-cont'>
-
-
                     <div>
-                        <h3>{vid.user.name}</h3>
+                    <h3>{vid.user.name} {localStorage.getItem("username") === vid.user.username ? <a href='/userprofile'><img className="usernameimg2" src={vid.user.profilePic}/></a>:<a href={touser}><img className="usernameimg2" src={vid.user.profilePic}/></a>} </h3> 
+
                         <video className="videoss" width="400" height="300" controls>
                             <source src={`http://localhost:5000/video/${vid.id}`} />
                         </video>
-                        <div>{vid.likes}</div>
+                        <div><span onClick={this.like}><i class="fas fa-heart"></i></span>{vid.likes}</div>
                         <div>
-                        {vid.comments.map(c => <Comment c={c}/> )}
+                        {vid.comments.map(c => <FeedComment c={c} vid ={vid} deleteComment={this.props.deleteComment}/> )}
              <input className="comments" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' />
                 <button onClick={this.commentfunction}>post</button>
                         </div>
-                        {/* <Comment c = {vid.comments} d ={d} comment ={this.props.comment}/> */}
                     </div>
+                    {/* <Comment c = {vid.comments} d ={d} comment ={this.props.comment}/> */}
+                </div>
             </div>
 
         )

@@ -14,10 +14,10 @@ class Comment extends Component {
 
 
 
-    commentfunction = async () =>{
+    commentfunction = async () => {
         this.comment()
-       await this.props.comment({username:localStorage.getItem("username"), videoId:this.props.d.id,  comments:this.state.box})
-       
+        await this.props.comment({ username: localStorage.getItem("username"), videoId: this.props.d.id, comments: this.state.box })
+
     }
 
 
@@ -40,12 +40,12 @@ class Comment extends Component {
 
     }
 
-   
+
 
     render() {
         // console.log(this.state.box.sort(function(a,b){return b-a}))
         console.log(this.props.c)
-        console.log(this.props.d)
+        console.log(this.props.userdata)
 
         return (
             <div>
@@ -63,9 +63,18 @@ class Comment extends Component {
                     </div>
 
                 </div>  </span>)} */}
+                <div className="commentcontainer">
+                    <input className="commentsss" type='text' value={this.state.comment} onChange={this.post} placeholder='comment' />
+                    <span onClick={this.commentfunction}><i class="fas fa-paper-plane"></i></span>
+                </div>
 
-                <input className="comments" type='text' value={this.state.comment} onChange={this.post} placeholder='comment' />
-                <button onClick={this.commentfunction}>post</button>
+                <div className="card2">
+                    <div className="container">
+                    <i class="fas fa-heart"></i> 
+                    </div>
+
+                </div>
+
 
             </div>
         )
