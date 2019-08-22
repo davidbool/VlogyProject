@@ -36,7 +36,7 @@ class UserPage extends Component {
         return (
 
 
-
+            
             <div className='userprofile'>
 
                 <div>
@@ -53,7 +53,7 @@ class UserPage extends Component {
                         <form >
                             
                             <label for="fname">About {this.state.userdata.username}</label>
-                            <div type="text" className="aboutmyself" name="fname" ></div>
+                            <div type="text" className="aboutmyself" name="fname" >{this.state.userdata.about} </div>
 
 
                         </form>
@@ -72,6 +72,7 @@ class UserPage extends Component {
                     </div>
                 </div>
             </div>
+           
 
         )
     }

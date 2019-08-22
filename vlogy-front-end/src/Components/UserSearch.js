@@ -16,23 +16,16 @@ class UserSearch extends Component {
 
     }
 
-    handlefollowing = (f) => {
-        let following = f.target.value
-        this.setState({
-            following
-        }, function () { this.updatefollowing() })
-        console.log(this.state.following)
+  
 
-    }
+    // updatefollowing = () => {
+    //     let datas = this.props.updateUser({ data: this.state.following, prop: 'following', username: localStorage.getItem("username") })
+    //     console.log(datas)
+    // }
 
 
-    updatefollowing = () => {
-        let datas = this.props.updateUser({ data: this.state.following, prop: 'following', username: localStorage.getItem("username") })
-        console.log(datas)
-    }
-
-
-    followbutton = () => {
+    followbutton = (f) => {
+       
         if (this.state.follow == true) {
             alert('UNFRIENDED')
             this.setState({
@@ -40,12 +33,14 @@ class UserSearch extends Component {
             })
 
         } else {
+            let following = f.target.value
             this.setState({
+                following,
                 follow: !this.state.follow
             })
         }
 
-        console.log(this.state.follow)
+        console.log(this.state.following)
     }
 
 
@@ -67,7 +62,7 @@ class UserSearch extends Component {
                         <h4><b>{this.props.username}</b></h4>
                         {this.state.follow ? <div onClick={this.followbutton}><i class="fas fa-user-minus"></i>
 
-                        </div> : <div onClick={this.followbutton} > <div value={this.props.username} onChange={this.handlefollowing} ><i class="fas fa-user-plus"></i></div>
+                        </div> : <div value={this.props.username} onClick={this.followbutton} > <i class="fas fa-user-plus"></i>
 
                             </div>}
                         {this.props.allData.filter(u => u.username == this.props.username).map(f => f.profilePic === undefined ?

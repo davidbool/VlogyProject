@@ -16,7 +16,8 @@ class UserProfile extends Component {
             UserData: [],
             img: '',
             editimg: false,
-            editingtwo: false
+            editingtwo: false,
+            file: React.createRef(),
         }
     }
 
@@ -122,6 +123,21 @@ class UserProfile extends Component {
 
     }
 
+    handleUploadFile = () => {
+        const data = new FormData();
+        let username = localStorage.getItem("username")
+        data.append('file', this.state.file.current.files[0]);
+        axios.post('http://localhost:5000/upload', data).then((response) => {
+            axios({
+                method: 'put',
+                url: 'http://localhost:5000/uploadVideo',
+                data: {
+                    filename: response.data,
+                    username: username
+                }
+            });
+        })
+    }
 
     deleteuser = () => {
         localStorage.username = { 'username': localStorage.getItem("username") };
@@ -137,7 +153,8 @@ class UserProfile extends Component {
 
             < Router >
                 <div className='userprofile'>
-
+              
+                        
                     <div>
 
                         {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)[0] === undefined ?
@@ -155,6 +172,8 @@ class UserProfile extends Component {
                             <i class="fas fa-door-open"></i>
 
                         </div></a>
+                        <input type='file' class="fas fa-video" ref={this.state.file} />
+                        <button onClick={this.handleUploadFile} >upload</button>
                         <form >
                             <label for="fname">About MySelf</label>
                             {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about)=== undefined || this.state.editingtwo? <input  value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" />:
