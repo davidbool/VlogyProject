@@ -354,9 +354,7 @@ article:hover a {
 
 .card2:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-
 }
-
 
 .card3:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -370,20 +368,20 @@ article:hover a {
   position: absolute;
   left: 10%;
   margin: 2.6vw
-  
 }
 
+.card2:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
 
 .card4:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card4 {
- 
   position: absolute;
   right: 20%;
   margin: 10vw
-  
 }
 
 .container {
@@ -523,6 +521,14 @@ li a:hover {
   box-shadow: -4px -7px 65px -20px rgba(45, 44, 46, 1);
 }
 
+.usernameimg2 {
+  width: 100px;
+  height: 100px;
+  border: 5px solid rgb(255, 145, 0);
+  border-radius: 100px;
+  box-shadow: -4px -7px 65px -20px rgba(45, 44, 46, 1);
+}
+
 .imginput {
   text-align: center;
   border: 3px solid #1C6EA4;
@@ -609,11 +615,60 @@ li a:hover {
   color: floralwhite
 }
 
-.fa-heart{
-  color:rgb(255, 38, 0);
+.fa-heart {
+  color: rgb(255, 38, 0);
   font-size: 4vw
 }
 
 .fa-heart:active {
   transform: translateY(9px);
+}
+
+.fa-trash {
+  position: absolute;
+  right: 20vw;
+  font-size: 2vw;
+  color: #111
+}
+
+.fa-trash:active {
+  transform: translateY(4px);
+}
+
+.commentcontainer {
+  position: absolute;
+  right: 30vw;
+}
+
+.commentsss {
+  background-color: transparent;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 1.3vw;
+  border-bottom: 2px solid rgb(255, 238, 0);
+}
+
+.fa-paper-plane {
+  font-size: 27px
+}
+
+.commentsss:hover {
+  background-color: #1111116c
+}
+
+.commentsss::placeholder {
+  color: whitesmoke
+}
+
+.fa-paper-plane:active {
+  transform: translateY(4px);
+}
+
+.myfeed {font-family: "Brush Script MT";
+margin-left: 37vw;
+
+  color: #000000;
+  background: transparent;
+  text-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #ffffff;
+  font-size: 10vw
 }

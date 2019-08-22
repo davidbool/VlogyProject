@@ -11,7 +11,7 @@ class VideoUserP extends Component {
             likes: false
         }
     }
-
+    
 
 
     likes = () => {
