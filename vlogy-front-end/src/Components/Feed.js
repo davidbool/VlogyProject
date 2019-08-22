@@ -63,7 +63,7 @@ class Feed extends Component {
         return (
             <Router>
                 <div className='feed'>
-                
+
 
                     <div className='input'>
 
@@ -76,8 +76,6 @@ class Feed extends Component {
                         </div>
 
                     </div>
-
-                  
 
                 </div> 
 

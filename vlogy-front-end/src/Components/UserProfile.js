@@ -113,10 +113,10 @@ class UserProfile extends Component {
         console.log(MyVideo)
     }
     exit = () => {
-        alert(`${this.props.UserData.username} you are Loging-Out`)
+        alert(`${localStorage.getItem("username")} you are Loging-Out`)
+        localStorage.clear()
         this.deleteuser()
     }
-
 
     getvideo = async () => {
         let username = localStorage.getItem('username')
@@ -127,10 +127,8 @@ class UserProfile extends Component {
     }
     componentDidMount = async () => {
         let data = await this.getvideo()
-        this.setState({ UserData: data })
-        return this.state.UserData
-
-
+        // this.setState({ UserData: data })
+        // return this.state.UserData
     }
 
     handleUploadFile = () => {
@@ -164,7 +162,6 @@ class UserProfile extends Component {
 
             < Router >
                 <div className='userprofile'>
-
 
                     <div>
 
@@ -210,6 +207,7 @@ class UserProfile extends Component {
                                     {/* {this.props.allData} */}
                                         </div>
                                     </div>
+
                                     <video className="videoss" width="400" height="300" controls>
                                         <source src={`http://localhost:5000/video/${d}`} />
                                     </video>

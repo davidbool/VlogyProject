@@ -60,13 +60,13 @@ class UserPage extends Component {
                             <label for="fname">About {this.state.userdata.username}</label>
                             <div type="text" className="aboutmyself" name="fname" >{this.state.userdata.about} </div>
 
-
                         </form>
 
                         <div>
                             {!this.state.userdata.uploads ? null : this.state.userdata.uploads.map(d =>
                              <VideoUserP updateUser={this.props.updateUser} updateUserVideo={this.props.updateUserVideo} d={d} username={this.state.userdata.username} />
                             )}
+
                         </div>
 
                     </div>
