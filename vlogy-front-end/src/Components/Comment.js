@@ -43,13 +43,15 @@ class Comment extends Component {
    
 
     render() {
-        console.log(this.state.box.sort(function(a,b){return b-a}))
+        // console.log(this.state.box.sort(function(a,b){return b-a}))
+        console.log(this.props.c)
+        console.log(this.props.d)
 
         return (
             <div>
 
 
-                {this.props.d.comments.map(c => c === ''? null: <span>  <div class="dialogbox">
+                {/* {this.props.d.comments.map(c => c === ''? null: <span>  <div class="dialogbox">
                     <div class="body">
                         <span class="tip tip-left"></span>
                         <div>{localStorage.getItem("username")}</div>
@@ -60,7 +62,7 @@ class Comment extends Component {
 
                     </div>
 
-                </div>  </span>)}
+                </div>  </span>)} */}
 
                 <input className="comments" type='text' value={this.state.comment} onChange={this.post} placeholder='comment' />
                 <button onClick={this.commentfunction}>post</button>

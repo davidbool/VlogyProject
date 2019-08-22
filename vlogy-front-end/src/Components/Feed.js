@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import App from '../App'
 import axios from 'axios'
-import Videos from './Videos'
+import FeedVideo from './FeedVideo'
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -12,7 +12,8 @@ class Feed extends Component {
         this.state = {
             file: React.createRef(),
             data: [],
-            UserData: {}
+            UserData: {},
+            showupload: false
         }
     }
 
@@ -28,20 +29,36 @@ class Feed extends Component {
                     filename: response.data,
                     username: username
                 }
-            });
+            }).then((response) => {
+                this.getFeed()
+                this.setState({
+                    showupload: false,
+                    file: React.createRef()
+                })
+
+            })
         })
     }
 
+    exit = () => {
+        alert(`${localStorage.getItem("username")} you are Loging-Out`)
+        localStorage.clear()
+    }
+
+
+    showupload =() =>{
+        this.setState({
+            showupload : !this.state.showupload
+        })
+    }
 
     getFeed = async () => {
         let videos = await axios.get('http://localhost:5000/feed')
-        return videos.data
+        this.setState({ data : videos.data })
     
     }
     componentDidMount = async () => {
-        let data = await this.getFeed()
-        this.setState({ data })
-    
+        this.getFeed()
     }
   
     handleinput = (e) => {
@@ -53,26 +70,34 @@ class Feed extends Component {
         axios.put('http://localhost:5000/addComment', data)
           .then( (response) => {
             console.log(response)
-            this.componentDidMount()
+            this.getFeed()
           })
     }
     
 
     render() {
-        console.log(this.state.data)
         return (
             <Router>
                 <div className='feed'>
 
+                 <a href='/' >
+     <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                   </a>
 
                     <div className='input'>
 
 
-                        <input type='file' class="fas fa-video" ref={this.state.file} />
-                        <button onClick={this.handleUploadFile} >upload</button>
+                    {this.state.showupload ?
+                            <div><div onClick={this.showupload} ><li class="fas fa-video"></li></div>
+                                <div className="uploadcontainer">
+                                    <input className="inputupload" type='file' ref={this.state.file} />
+                                    <button className="uploadbutton" onClick={this.handleUploadFile} >upload</button>
+                                </div> </div> :
+                            <div onClick={this.showupload} ><li class="fas fa-video"></li></div>}
                         <div>
-
-                            <Videos comment= {this.comment} data={this.state.data} UserData={this.state.UserData} />
+                        {this.state.data.map(v => <FeedVideo vid ={v} UserData={this.state.UserData} comment = {this.comment} />)}
                         </div>
 
                     </div>
