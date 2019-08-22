@@ -73,8 +73,22 @@ class Feed extends Component {
             this.getFeed()
           })
     }
-    
-
+    deleteComment = (data) =>{
+        console.log(data)
+        axios({
+            method: 'delete',
+            url: 'http://localhost:5000/comment',
+            data: data
+            }).then((response) => {
+            this.getFeed()
+            })
+        }
+    likeVid = (data) =>{
+        axios.put('http://localhost:5000/updateUser/video', data)
+      .then( (response) => {
+        this.getFeed()
+      })
+    }
     render() {
         return (
             <Router>
@@ -97,7 +111,7 @@ class Feed extends Component {
                                 </div> </div> :
                             <div onClick={this.showupload} ><li class="fas fa-video"></li></div>}
                         <div>
-                        {this.state.data.map(v => <FeedVideo vid ={v} UserData={this.state.UserData} comment = {this.comment} />)}
+                        {this.state.data.map(v => <FeedVideo deleteComment ={this.deleteComment} likeVid ={this.likeVid} vid ={v} UserData={this.state.UserData} comment = {this.comment} />)}
                         </div>
 
                     </div>
