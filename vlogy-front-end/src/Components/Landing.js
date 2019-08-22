@@ -68,7 +68,7 @@ class Landing extends Component {
                     } />
 
                     <Route path='/userprofile' exact render={() => <UserProfile updateUser={this.props.updateUser} allData={this.props.allData} updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
-                    <Route path='/user/:username' exact render={({ match }) => <UserPage match={match} UserData={this.props.UserData} />} />
+                    <Route path='/user/:username' exact render={({ match }) => <UserPage updateUser={this.props.updateUser} updateUserVideo={this.props.updateUserVideo} match={match} UserData={this.props.UserData} />} />
                 </Router>
 
             </div>

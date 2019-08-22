@@ -2,15 +2,21 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import VideoUserP from './VideoUserP'
 
 
 class UserPage extends Component {
     constructor() {
         super()
         this.state = {
-            userdata: {}
+            userdata: {},
+            
+
         }
     }
+
+
+
     getUser = async () => {
         let username = this.props.match.params.username
         let res = await axios.get(`http://localhost:5000/user/${username}`)
@@ -32,17 +38,16 @@ class UserPage extends Component {
 
 
     render() {
-
         return (
 
 
-            
+
             <div className='userprofile'>
 
                 <div>
 
 
-                    <div className='usernameprofile'> <img className="usernameimg"  src={this.state.userdata.profilePic}/> <div >   </div>
+                    <div className='usernameprofile'> <img className="usernameimg" src={this.state.userdata.profilePic} /> <div >   </div>
 
 
 
@@ -51,7 +56,7 @@ class UserPage extends Component {
 
                         </div></a>
                         <form >
-                            
+
                             <label for="fname">About {this.state.userdata.username}</label>
                             <div type="text" className="aboutmyself" name="fname" >{this.state.userdata.about} </div>
 
@@ -60,19 +65,14 @@ class UserPage extends Component {
 
                         <div>
                             {!this.state.userdata.uploads ? null : this.state.userdata.uploads.map(d =>
-                                <div>
-                                    <video className="videoss" width="400" height="300" controls>
-                                        <source src={`http://localhost:5000/video/${d.videoId}`} />
-                                    </video>
-
-                                </div>
+                             <VideoUserP updateUser={this.props.updateUser} updateUserVideo={this.props.updateUserVideo} d={d} username={this.state.userdata.username} />
                             )}
                         </div>
 
                     </div>
                 </div>
             </div>
-           
+
 
         )
     }

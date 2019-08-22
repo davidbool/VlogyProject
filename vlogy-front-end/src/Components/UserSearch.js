@@ -57,7 +57,7 @@ class UserSearch extends Component {
 
 
                 <div class="card">
-                    <img src="" />
+                    
                     <div class="container">
                         <h4><b>{this.props.username}</b></h4>
                         {this.state.follow ? <div onClick={this.followbutton}><i class="fas fa-user-minus"></i>

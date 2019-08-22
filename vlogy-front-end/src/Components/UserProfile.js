@@ -18,6 +18,7 @@ class UserProfile extends Component {
             editimg: false,
             editingtwo: false,
             file: React.createRef(),
+            showupload: false
         }
     }
 
@@ -44,13 +45,22 @@ class UserProfile extends Component {
     handleeditimgtwo = () => {
 
         this.setState({
-            
+
             editingtwo: !this.state.editingtwo,
 
         })
 
     }
 
+    showupload = () => {
+
+        this.setState({
+
+            showupload: !this.state.showupload,
+
+        })
+
+    }
 
     handleUserName = (u) => {
         let username = u.target.value
@@ -96,7 +106,7 @@ class UserProfile extends Component {
         }, function () {
             this.updateabout()
         })
-                
+
     }
     who = () => {
         let MyVideo = 'uploads.videoId'
@@ -145,7 +155,7 @@ class UserProfile extends Component {
     }
 
     render() {
-        console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about))
+        console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about))
         console.log(this.state.UserData)
         let userPic = this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
         console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.following)[0])
@@ -153,8 +163,8 @@ class UserProfile extends Component {
 
             < Router >
                 <div className='userprofile'>
-              
-                        
+
+
                     <div>
 
                         {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)[0] === undefined ?
@@ -172,13 +182,20 @@ class UserProfile extends Component {
                             <i class="fas fa-door-open"></i>
 
                         </div></a>
-                        <input type='file' class="fas fa-video" ref={this.state.file} />
-                        <button onClick={this.handleUploadFile} >upload</button>
+
+                        {this.state.showupload ?
+                            <div><div onClick={this.showupload} ><li class="fas fa-video"></li></div>
+                                <div className="uploadcontainer">
+                                    <input className="inputupload" type='file' ref={this.state.file} />
+                                    <button className="uploadbutton" onClick={this.handleUploadFile} >upload</button>
+                                </div> </div> :
+                            <div onClick={this.showupload} ><li class="fas fa-video"></li></div>}
+
                         <form >
                             <label for="fname">About MySelf</label>
-                            {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about)=== undefined || this.state.editingtwo? <input  value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" />:
-                             <div type="text" className="aboutmyself" name="fname">{this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r=>r.about)}<i onClick={this.handleeditimgtwo} className="fas fa-pencil-alt"></i> </div>}
-                            
+                            {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about) === undefined || this.state.editingtwo ? <input value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" /> :
+                                <div type="text" className="aboutmyself" name="fname">{this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about)}<i onClick={this.handleeditimgtwo} className="fas fa-pencil-alt"></i> </div>}
+
 
 
                         </form>
@@ -186,12 +203,19 @@ class UserProfile extends Component {
                         <div>
                             {this.state.UserData.map(d =>
                                 <div>
+                                     <div className="card2">
+                                        <div className="container">
+                                            hello
+                                    {/* {this.props.allData} */}
+                                        </div>
+                                    </div>
                                     <video className="videoss" width="400" height="300" controls>
                                         <source src={`http://localhost:5000/video/${d}`} />
                                     </video>
-
+                                   
                                 </div>
                             )}
+
                         </div>
                     </div>
                 </div>

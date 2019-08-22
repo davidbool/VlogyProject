@@ -16,11 +16,25 @@ router.get('/user/:username', (req,res) =>{
 
 //updates base user data
 router.put('/updateUser', (req, res) => {
+  
   User.findOne({username: req.body.username}, function(err,doc){
     doc[req.body.prop] = req.body.data
     doc.save(function(err){res.send(err)})
   })
 })
+
+router.put('/updateUser/video', (req, res) => {
+  User.findOne({username: req.body.username}, function(err,doc){
+    let newuplouds = [...doc.uploads]
+    doc.uploads = []
+    newuplouds.find(u => u.videoId === req.body.videoId)[req.body.prop] = req.body.data 
+    newuplouds.forEach(v => doc.uploads.push(v))
+    console.log(newuplouds)
+    doc.save(function(err){res.send(err)})
+  })
+})
+
+
 
 //input: username, videoId, comment 
 //save the comment in the user DB in the uploads array
