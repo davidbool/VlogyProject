@@ -154,6 +154,7 @@ class UserProfile extends Component {
         localStorage.username = undefined
     }
 
+
     render() {
         console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about))
         console.log(this.state.UserData)
@@ -223,6 +224,6 @@ class UserProfile extends Component {
         );
     }
 
-}
 
+}
 export default UserProfile;

@@ -81,9 +81,6 @@ class Feed extends Component {
 
                 </div> 
 
-               
-               
-
             </Router>
         )
     }
