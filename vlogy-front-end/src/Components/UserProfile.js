@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import feed from './Feed'
 import Login from './Login';
-
+import Video from './Video'
 
 class UserProfile extends Component {
     constructor() {
@@ -123,11 +123,23 @@ class UserProfile extends Component {
         let password = localStorage.getItem('password')
         let user = await axios.get(`http://localhost:5000/username/${username}/password/${password}`)
         let movies = (user.data[0].uploads.map(v => v.videoId))
-        return movies
+        this.setState({ UserData: movies })
     }
-    componentDidMount = async () => {
-        let data = await this.getvideo()
-        // this.setState({ UserData: data })
+
+    deleteVideo = (videoId) =>{
+        let username = localStorage.getItem("username")
+        axios({
+            method: 'delete',
+            url: `http://localhost:5000/files/${videoId}/${username}`,
+        }).then((response) =>{
+            console.log(response)
+            this.getvideo()
+        })
+    }
+
+    componentDidMount = () => {
+        this.getvideo()
+        
         // return this.state.UserData
     }
 
@@ -143,7 +155,13 @@ class UserProfile extends Component {
                     filename: response.data,
                     username: username
                 }
-            });
+            }).then((response) =>{
+                this.setState({
+                    file: React.createRef(),
+                    showupload: false
+                })
+                this.getvideo()
+            })
         })
     }
 
@@ -154,10 +172,10 @@ class UserProfile extends Component {
 
 
     render() {
-        console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about))
+        // console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about))
         console.log(this.state.UserData)
         let userPic = this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
-        console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.following)[0])
+        // console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.following)[0])
         return (
 
             < Router >
@@ -178,7 +196,6 @@ class UserProfile extends Component {
 
                         <a href='/' > <div onClick={this.deleteuser} className="logOut"><i class="fas fa-walking"></i>
                             <i class="fas fa-door-open"></i>
-
                         </div></a>
 
                         {this.state.showupload ?
@@ -204,14 +221,9 @@ class UserProfile extends Component {
                                      <div className="card2">
                                         <div className="container">
                                             hello
-                                    {/* {this.props.allData} */}
                                         </div>
                                     </div>
-
-                                    <video className="videoss" width="400" height="300" controls>
-                                        <source src={`http://localhost:5000/video/${d}`} />
-                                    </video>
-                                   
+                                    <Video d ={d} delete = {this.deleteVideo} />
                                 </div>
                             )}
 

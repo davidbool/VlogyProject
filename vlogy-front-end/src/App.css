@@ -348,12 +348,13 @@ article:hover a {
   width: 40%;
   position: absolute;
   right: 16vw;
-  margin: 2.6vw
-  
+  margin: 2.6vw;
+  z-index: -1;
 }
 
 .card2:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+
 }
 
 

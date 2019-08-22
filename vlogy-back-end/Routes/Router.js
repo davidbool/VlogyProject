@@ -43,7 +43,7 @@ router.put('/addComment', (req, res) =>{
     console.log(doc.uploads)
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
-    newArr[index].comments.push(req.body.comments)
+    newArr[index].comments.push(req.body.comment)
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
     doc.save(function(err){res.send(err)})
@@ -75,7 +75,7 @@ router.get('/feed', (req, res) =>{
       for(let v of d.uploads){
         videos.push({
           id: v.videoId,
-          user: d.name,
+          user: d,
           likes: v.likes,
           comments: v.comments
         })
