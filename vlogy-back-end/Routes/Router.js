@@ -40,7 +40,6 @@ router.put('/updateUser/video', (req, res) => {
 //save the comment in the user DB in the uploads array
 router.put('/addComment', (req, res) =>{ 
   User.findOne({username: req.body.username}, function(err, doc){
-    console.log(doc.uploads)
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
     newArr[index].comments.push(req.body.comment)
@@ -183,8 +182,8 @@ router.delete('/files/:id/:username', (req, res) => {
 });
 
 //delete comments from the User BD
-router.delete('/comments', (req, res) =>{
-  User.findOne({name: req.body.name}, function(err, doc){
+router.delete('/comment', (req, res) =>{
+  User.findOne({username: req.body.username}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
     let i = newArr[index].comments.findIndex(c => c == req.body.comment)
