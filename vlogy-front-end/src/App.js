@@ -24,12 +24,7 @@ class App extends Component {
       })
 }
 
-  updateUserVideo = (data) => {
-    axios.put('http://localhost:5000/updateUser/video', data)
-      .then( (response) => {
-        this.myData()
-      })
-  }
+
 
 
   myData = async () => {
@@ -77,10 +72,11 @@ componentDidMount = async () => {
 
   
   render() {
+    
     return (
       <Router>
         <div className="App" >      
-        <Landing updateUser={this.updateUser} updateUserVideo={this.updateUserVideo} allData={this.state.allData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
+        <Landing updateUser={this.updateUser}  allData={this.state.allData} newUser={this.newUser} deleteuser={this.deleteuser} UserData={this.state.UserData} UserExict={this.UserExict} newUser={this.newUser} />
       </div>
       </Router>
     ); 

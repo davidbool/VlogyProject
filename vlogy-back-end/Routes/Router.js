@@ -27,8 +27,9 @@ router.put('/like', (req, res) => {
   User.findOne({username: req.body.uploader}, function(err,doc){
     let newuplouds = [...doc.uploads]
     doc.uploads = []
+    let num = newuplouds.find(u => u.videoId === req.body.videoId).likes
     if (typeof (num) == "number"){
-      newuplouds.find(u => u.videoId === req.body.videoId).likes = {}
+      newuplouds.find(u => u.videoId === req.body.videoId).likes = {num: 0, users:[]}
     }
     let ob = newuplouds.find(u => u.videoId === req.body.videoId).likes
     if(ob.users.find(u => u === req.body.username) == undefined){
@@ -52,7 +53,7 @@ router.put('/addComment', (req, res) =>{
   User.findOne({username: req.body.uploader}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
-    newArr[index].comments.push({text :req.body.comment, user: req.body.username)
+    newArr[index].comments.push({text :req.body.comment, user: req.body.username})
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
     doc.save(function(err){res.send(err)})
