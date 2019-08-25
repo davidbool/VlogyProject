@@ -53,11 +53,8 @@ class UserProfile extends Component {
     }
 
     showupload = () => {
-
         this.setState({
-
             showupload: !this.state.showupload,
-
         })
 
     }
