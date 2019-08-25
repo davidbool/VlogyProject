@@ -7,6 +7,9 @@ import UserProfile from './UserProfile';
 import UserSearch from './UserSearch';
 import Feed from './Feed'
 import UserPage from './UserPage';
+import GridFeed from './GridFeed';
+import axios from 'axios';
+import Feedsecond from './Feedsecond'
 
 
 class Landing extends Component {
@@ -14,10 +17,11 @@ class Landing extends Component {
         super()
         this.state = {
             searchPut: '',
+          
 
         }
     }
-
+   
 
     searchPutChange = (event) => {
         const input = event.target.value
@@ -60,7 +64,7 @@ class Landing extends Component {
                     <Route path="/feed" exact render={() => <Feed />} />
                     <Route path="/" exact render={() => <Login UserData={this.props.UserData} UserExict={this.props.UserExict} />} />
                     <Route path="/signup" exact render={() => <Signup newUser={this.props.newUser} />} />
-
+                    <Route path="/gridfeed" exact render={() => <Feedsecond />}/>
                     <Route path="/usersearch" exact render={() =>
                         this.state.searchPut === '' ?
                             data.map(r => <UserSearch allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />) :
@@ -68,7 +72,7 @@ class Landing extends Component {
                     } />
 
                     <Route path='/userprofile' exact render={() => <UserProfile updateUser={this.props.updateUser} allData={this.props.allData} updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
-                    <Route path='/user/:username' exact render={({ match }) => <UserPage updateUser={this.props.updateUser} updateUserVideo={this.props.updateUserVideo} match={match} UserData={this.props.UserData} />} />
+                    <Route path='/user/:username' exact render={({ match }) => <UserPage updateUser={this.props.updateUser} match={match} UserData={this.props.UserData} />} />
                 </Router>
 
             </div>
