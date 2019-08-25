@@ -13,7 +13,7 @@ class UserProfile extends Component {
             password: '',
             about: '',
             showlogout: false,
-            UserData: [],
+            UserData: {uploads : []},
             img: '',
             editimg: false,
             editingtwo: false,
@@ -34,29 +34,22 @@ class UserProfile extends Component {
 
 
     handleeditimg = () => {
-
         this.setState({
             img: '',
             editimg: !this.state.editimg,
-
         })
-
     }
+
     handleeditimgtwo = () => {
-
         this.setState({
-
             editingtwo: !this.state.editingtwo,
-
         })
-
     }
 
     showupload = () => {
         this.setState({
             showupload: !this.state.showupload,
         })
-
     }
 
     handleUserName = (u) => {
@@ -65,7 +58,6 @@ class UserProfile extends Component {
             username
         })
     }
-
 
     handleimg = (u) => {
         let img = u.target.value
@@ -77,7 +69,6 @@ class UserProfile extends Component {
     }
 
     handleshow = () => {
-
         this.setState({
             showlogout: !this.state.showlogout
         })
@@ -105,22 +96,18 @@ class UserProfile extends Component {
         })
 
     }
-    who = () => {
-        let MyVideo = 'uploads.videoId'
-        console.log(MyVideo)
-    }
+    
     exit = () => {
         alert(`${localStorage.getItem("username")} you are Loging-Out`)
         localStorage.clear()
         this.deleteuser()
     }
 
-    getvideo = async () => {
+    getUser = async () => {
         let username = localStorage.getItem('username')
         let password = localStorage.getItem('password')
         let user = await axios.get(`http://localhost:5000/username/${username}/password/${password}`)
-        let movies = (user.data[0].uploads.map(v => v.videoId))
-        this.setState({ UserData: movies })
+        this.setState({ UserData: user.data[0] })
     }
 
     deleteVideo = (videoId) => {
@@ -135,9 +122,7 @@ class UserProfile extends Component {
     }
 
     componentDidMount = () => {
-        this.getvideo()
-
-        // return this.state.UserData
+        this.getUser()
     }
 
     handleUploadFile = () => {
@@ -166,11 +151,32 @@ class UserProfile extends Component {
         localStorage.username = { 'username': localStorage.getItem("username") };
         localStorage.username = undefined
     }
+    likeVid = (data) =>{
+        axios.put('http://localhost:5000/like', data)
+      .then( (response) => {
+        this.getUser()
+      })
+    }
+    comment = (data) => {
+        axios.put('http://localhost:5000/addComment', data)
+            .then((response) => {
+                console.log(response)
+                this.getUser()
+            })
+    }
+    deleteComment = (data) =>{
+        axios({
+            method: 'delete',
+            url: 'http://localhost:5000/comment',
+            data: data
+            }).then((response) => {
+            this.getUser()
+            })
+        }
 
 
     render() {
         // console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about))
-        console.log(this.state.UserData)
         let userPic = this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
         // console.log(this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.following)[0])
         return (
@@ -213,11 +219,11 @@ class UserProfile extends Component {
                         </form>
 
                         <div>
-                            {this.state.UserData.map(d =>
+                            {this.state.UserData.uploads.map(d =>
                                 <div>
                                     <div onClick={this.deleteVideo}><i class="fas fa-trash"></i>
                                     </div>
-                                    <Video userdata={this.state.UserData} d={d} delete={this.deleteVideo} />
+                                    <Video likeVid={this.likeVid} userdata={this.state.UserData} d={d} deleteComment={this.deleteComment} comment={this.comment} />
                                 </div>
                             )}
 

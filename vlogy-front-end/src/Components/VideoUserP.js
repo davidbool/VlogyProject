@@ -9,7 +9,8 @@ class VideoUserP extends Component {
         this.state = {
             like: 0,
             likes: false,
-            timeclick: 0
+            timeclick: 0,
+            comment : ""
         }
     }
     
@@ -62,35 +63,58 @@ class VideoUserP extends Component {
         // }
     }
 
-    updatelikes = () => {
-        let datas = this.props.updateUserVideo({ data: this.state.like, prop: 'likes', username: this.props.username, videoId: this.props.d.videoId })
-        console.log(datas)
+    // updatelikes = () => {
+    //     let datas = this.props.updateUserVideo({ data: this.state.like, prop: 'likes', username: this.props.username, videoId: this.props.d.videoId })
+    //     console.log(datas)
+    // }
+    like = () =>{
+        let vid = this.props.d
+        let data ={
+            username: localStorage.getItem("username"),
+            videoId: vid.videoId,
+            uploader: this.props.username
+        }
+        this.props.likeVid(data)
+    }
+    handleInput = (e) =>{
+        this.setState({
+            comment: e.target.value
+        })
+    }
+    
+    commentfunction = () =>{
+        let data ={
+            username: localStorage.getItem("username"),
+            videoId: this.props.d.videoId,
+            comment: this.state.comment,
+            uploader: this.props.username
+        }
+        this.props.comment(data)
+        this.setState({
+            comment: ""
+        })
     }
 
 
-
     render() {
-        console.log(this.props.d)
-        console.log(this.props.username)
         return (
             <div >
                 <div>
                   
                     <div className="card4">
-                        <div onClick={this.postLike} className="container">
+                        <div onClick={this.like} className="container">
                             <i class="fas fa-heart"></i>
-                            {this.state.likes ? this.props.d.likes : this.props.d.likes}
-
+                            {this.state.likes ? this.props.d.likes.num : this.props.d.likes.num}
                         </div>
-                        {/* <div><button onClick={this.unlike}>unlike</button>
-
-                        </div> */}
                     </div>
                     <video className="videoss" width="400" height="300" controls>
                         <source src={`http://localhost:5000/video/${this.props.d.videoId}`} />
-
                     </video>
-
+                    <div className="commentcontainer">
+                    <input className="commentsss" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' />
+                    <span onClick={this.commentfunction}><i class="fas fa-paper-plane"></i></span>
+                </div>
+                    {this.props.d.comments.map(c => <Comment deleteComment ={this.props.deleteComment} comment ={c} user={this.props.username} vidId ={this.props.d.videoId} />)}
                 </div>
             </div>
 

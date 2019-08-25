@@ -16,9 +16,10 @@ class Videos extends Component {
     }
     commentfunction = () =>{
         let data ={
-            username: this.props.vid.user.username,
+            username: localStorage.getItem("username"),
             videoId: this.props.vid.id,
-            comment: this.state.comment
+            comment: this.state.comment,
+            uploader: this.props.vid.user.username
         }
         this.props.comment(data)
         this.setState({
@@ -28,10 +29,9 @@ class Videos extends Component {
     like = () =>{
         let vid = this.props.vid
         let data ={
-            username: vid.user.username,
+            username: localStorage.getItem("username"),
             videoId: vid.id,
-            prop: 'likes',
-            data: vid.likes +1
+            uploader: vid.user.username
         }
         this.props.likeVid(data)
     }
@@ -39,7 +39,6 @@ class Videos extends Component {
     render() {
         let vid = this.props.vid
         let touser = `/user/${vid.user.username}`
-       let UserData = this.props.user
         return (
 
             <div className='video-cont'>
@@ -49,7 +48,7 @@ class Videos extends Component {
                         <video className="videoss" width="400" height="300" controls>
                             <source src={`http://localhost:5000/video/${vid.id}`} />
                         </video>
-                        <div><span onClick={this.like}><i class="fas fa-heart"></i></span>{vid.likes}</div>
+                        <div><span onClick={this.like}><i class="fas fa-heart"></i></span>{vid.likes.num}</div>
                         <div>
                         {vid.comments.map(c => <FeedComment c={c} vid ={vid} deleteComment={this.props.deleteComment}/> )}
              <input className="commentsss" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' />
