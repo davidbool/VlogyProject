@@ -29,7 +29,6 @@ router.put('/updateUser/video', (req, res) => {
     doc.uploads = []
     newuplouds.find(u => u.videoId === req.body.videoId)[req.body.prop] = req.body.data 
     newuplouds.forEach(v => doc.uploads.push(v))
-    console.log(newuplouds)
     doc.save(function(err){res.send(err)})
   })
 })

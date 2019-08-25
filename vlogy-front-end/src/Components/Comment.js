@@ -46,23 +46,12 @@ class Comment extends Component {
         // console.log(this.state.box.sort(function(a,b){return b-a}))
         console.log(this.props.c)
         console.log(this.props.userdata)
-
+        let c = this.props.c
         return (
             <div>
 
 
-                {/* {this.props.d.comments.map(c => c === ''? null: <span>  <div class="dialogbox">
-                    <div class="body">
-                        <span class="tip tip-left"></span>
-                        <div>{localStorage.getItem("username")}</div>
-                        <div onClick={this.delete}><i class="fas fa-trash-alt"></i></div>
-                        <div class="message">
-                            <span>{c}</span>
-                        </div>
 
-                    </div>
-
-                </div>  </span>)} */}
                 <div className="commentcontainer">
                     <input className="commentsss" type='text' value={this.state.comment} onChange={this.post} placeholder='comment' />
                     <span onClick={this.commentfunction}><i class="fas fa-paper-plane"></i></span>
@@ -70,7 +59,24 @@ class Comment extends Component {
 
                 <div className="card2">
                     <div className="container">
-                    <i class="fas fa-heart"></i> 
+                        <i class="fas fa-heart"></i>
+                        {c === undefined ? null : <span>  <div class="dialogbox">
+                            <div class="body">
+                                <span class="tip tip-left"></span>
+
+                                <h6>{localStorage.getItem("username")}:</h6>
+                                {/* <div onClick={this.delete}><i class="fas fa-trash-alt"></i></div> */}
+                                <div class="message">
+                                    <span>{c}</span>
+                                </div>
+
+                            </div>
+
+                        </div>  </span>
+                        }
+
+
+
                     </div>
 
                 </div>

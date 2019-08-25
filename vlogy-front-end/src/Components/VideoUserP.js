@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import Comment from './Comment'
 
 class VideoUserP extends Component {
     constructor() {
@@ -75,11 +75,7 @@ class VideoUserP extends Component {
         return (
             <div >
                 <div>
-                    <div className="card3">
-                        <div className="container">
-
-                        </div>
-                    </div>
+                  
                     <div className="card4">
                         <div onClick={this.postLike} className="container">
                             <i class="fas fa-heart"></i>

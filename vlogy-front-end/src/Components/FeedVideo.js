@@ -52,13 +52,13 @@ class Videos extends Component {
                         <div><span onClick={this.like}><i class="fas fa-heart"></i></span>{vid.likes}</div>
                         <div>
                         {vid.comments.map(c => <FeedComment c={c} vid ={vid} deleteComment={this.props.deleteComment}/> )}
-             <input className="comments" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' />
-                <button onClick={this.commentfunction}>post</button>
+             <input className="commentsss" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' />
+                <span onClick={this.commentfunction}><i class="fas fa-paper-plane"></i></span>
                         </div>
                     </div>
                     {/* <Comment c = {vid.comments} d ={d} comment ={this.props.comment}/> */}
                 </div>
-            </div>
+            
 
         )
     }
