@@ -20,7 +20,12 @@ class FeedComment extends Component {
                 <span onClick={this.delete}><i class="fas fa-trash"></i></span>
                     <span class="tip tip-left"></span>
 
-                    <h6>{localStorage.getItem("username")}:</h6>
+                                <h6>{comment.user}:</h6>
+                                {/* <div onClick={this.delete}><i class="fas fa-trash-alt"></i></div> */}
+                                <div class="message">
+                                    <span>{comment.text}</span>
+                                </div>
+
 
                     <div class="message">
                         <span>{comment}</span>

@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import VideoUserP from './VideoUserP'
+import Feed from './Feed';
+import FeedVideo from './FeedVideo'
 
 
 class UserPage extends Component {
     constructor() {
         super()
         this.state = {
-            userdata: {},
-            
-
+            userdata: {}
         }
     }
 
@@ -20,16 +20,39 @@ class UserPage extends Component {
     getUser = async () => {
         let username = this.props.match.params.username
         let res = await axios.get(`http://localhost:5000/user/${username}`)
-        return res.data
+        this.setState({
+            userdata: res.data
+        })
     }
 
     componentDidMount = async () => {
-        let userdata = await this.getUser()
-        await this.setState({
-            userdata
-        })
-        this.state.userdata.uploads.forEach(r => console.log(r.videoId))
+        this.getUser()
     }
+
+    likeVid = (data) =>{
+        axios.put('http://localhost:5000/like', data)
+      .then( (response) => {
+        this.getUser()
+      })
+    }
+    comment = (data) => {
+        console.log(data)
+        axios.put('http://localhost:5000/addComment', data)
+            .then((response) => {
+                console.log(response)
+                this.getUser()
+            })
+        }
+
+    deleteComment = (data) =>{
+            axios({
+                method: 'delete',
+                url: 'http://localhost:5000/comment',
+                data: data
+                }).then((response) => {
+                this.getUser()
+                })
+    }    
 
     deleteuser = () => {
         localStorage.username = { 'username': localStorage.getItem("username") };
@@ -39,9 +62,6 @@ class UserPage extends Component {
 
     render() {
         return (
-
-
-
             <div className='userprofile'>
 
                 <div>
@@ -64,7 +84,7 @@ class UserPage extends Component {
 
                         <div>
                             {!this.state.userdata.uploads ? null : this.state.userdata.uploads.map(d =>
-                             <VideoUserP updateUser={this.props.updateUser} updateUserVideo={this.props.updateUserVideo} d={d} username={this.state.userdata.username} />
+                             <VideoUserP deleteComment={this.deleteComment} comment ={this.comment} likeVid={this.likeVid} d={d} username={this.state.userdata.username} />
                             )}
 
                         </div>

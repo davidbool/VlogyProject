@@ -17,11 +17,12 @@ class Videos extends Component {
         this.setState({ comment: event.target.value })
 
     }
-    commentfunction = () => {
-        let data = {
-            username: this.props.vid.user.username,
+    commentfunction = () =>{
+        let data ={
+            username: localStorage.getItem("username"),
             videoId: this.props.vid.id,
-            comment: this.state.comment
+            comment: this.state.comment,
+            uploader: this.props.vid.user.username
         }
         this.props.comment(data)
         this.setState({
@@ -30,11 +31,10 @@ class Videos extends Component {
     }
     like = () => {
         let vid = this.props.vid
-        let data = {
-            username: vid.user.username,
+        let data ={
+            username: localStorage.getItem("username"),
             videoId: vid.id,
-            prop: 'likes',
-            data: vid.likes + 1
+            uploader: vid.user.username
         }
         this.props.likeVid(data)
     }
@@ -43,7 +43,6 @@ class Videos extends Component {
         console.log(this.props.date)
         let vid = this.props.vid
         let touser = `/user/${vid.user.username}`
-        let UserData = this.props.user
         return (
 
 
@@ -51,7 +50,6 @@ class Videos extends Component {
             <div className='video-cont'>
                 <div>
                     <div class="card5">
-
                         <div class="container">
            
                             <h3>{vid.user.name} {localStorage.getItem("username") === vid.user.username ? <a href='/userprofile'><img className="usernameimg2" src={vid.user.profilePic} /></a> : <a href={touser}><img className="usernameimg2" src={vid.user.profilePic} /></a>} </h3>
@@ -64,7 +62,6 @@ class Videos extends Component {
                             </div>
                             <div className="date">{moment(this.props.date).subtract(6, 'days').calendar(this.props.date)  }</div>
                             <video className="videossss" width="550" height="450" controls>
-                                
                                 <source src={`http://localhost:5000/video/${vid.id}`} />
                             </video>
                             

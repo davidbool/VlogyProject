@@ -58,9 +58,7 @@ class Feed extends Component {
     getFeed = async () => {
         let videos = await axios.get('http://localhost:5000/feed')
         let feed = videos.data.filter(o => o.user.username !== localStorage.getItem("username"))
-        console.log(feed)
         this.setState({ data: feed })
-
     }
     componentDidMount = async () => {
         this.getFeed()
@@ -72,6 +70,7 @@ class Feed extends Component {
 
 
     comment = (data) => {
+        console.log(data)
         axios.put('http://localhost:5000/addComment', data)
             .then((response) => {
                 console.log(response)
@@ -80,7 +79,6 @@ class Feed extends Component {
     }
 
     deleteComment = (data) =>{
-        console.log(data)
         axios({
             method: 'delete',
             url: 'http://localhost:5000/comment',
@@ -91,7 +89,7 @@ class Feed extends Component {
         }
         
     likeVid = (data) =>{
-        axios.put('http://localhost:5000/updateUser/video', data)
+        axios.put('http://localhost:5000/like', data)
       .then( (response) => {
         this.getFeed()
       })
