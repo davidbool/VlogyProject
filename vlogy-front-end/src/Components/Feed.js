@@ -86,6 +86,7 @@ class Feed extends Component {
             this.getFeed()
             })
         }
+        
     likeVid = (data) =>{
         axios.put('http://localhost:5000/updateUser/video', data)
       .then( (response) => {
