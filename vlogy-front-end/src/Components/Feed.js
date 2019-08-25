@@ -4,6 +4,9 @@ import axios from 'axios'
 import FeedVideo from './FeedVideo'
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Draggable, {DraggableCore} from 'react-draggable';
+import GridFeed from './GridFeed'
+import Feedsecond from './Feedsecond'
 
 
 class Feed extends Component {
@@ -93,10 +96,15 @@ class Feed extends Component {
     }
     
     render() {
+        
         return (
             <Router>
                 <div className='feed'>
-                <span className="myfeed">Feed</span>
+                <span className="myfeed">Feed</span> 
+                {/* <Route path="/gridfeed" exact render={() => this.state.data.map(v =><GridFeed  deleteComment ={this.deleteComment} likeVid ={this.likeVid} vid ={v} UserData={this.state.UserData} date={v.user.uploads[0].date[0]} comment = {this.comment}  />)} /> */}
+                
+                <div className="grid"> <a href='/gridfeed' ><i class="fas fa-th-large"></i></a></div>
+
                     <a href='/' >
                         <div onClick={this.exit} className="logOut"><i class="fas fa-walking"></i>
                             <i class="fas fa-door-open"></i>
@@ -108,13 +116,14 @@ class Feed extends Component {
 
                         {this.state.showupload ?
                             <div><div onClick={this.showupload} ><li class="fas fa-video"></li></div>
-                                <div className="uploadcontainer">
+                            <Draggable>
+                                <div className="uploadcontainer2">
                                     <input className="inputupload" type='file' ref={this.state.file} />
                                     <button className="uploadbutton" onClick={this.handleUploadFile} >upload</button>
-                                </div> </div> :
+                                </div></Draggable> </div> :
                             <div onClick={this.showupload} ><li class="fas fa-video"></li></div>}
                         <div>
-                        {this.state.data.map(v => <FeedVideo deleteComment ={this.deleteComment} likeVid ={this.likeVid} vid ={v} UserData={this.state.UserData} comment = {this.comment} />)}
+                        {this.state.data.map(v => <FeedVideo deleteComment ={this.deleteComment} likeVid ={this.likeVid} vid ={v} UserData={this.state.UserData} date={v.user.uploads[0].date[0]} comment = {this.comment} />)}
                         </div>
 
                     </div>

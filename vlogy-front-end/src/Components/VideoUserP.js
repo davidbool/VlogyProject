@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Comment from './Comment'
+import Comment from './Comment';
+import axios from 'axios';
 
 class VideoUserP extends Component {
     constructor() {
@@ -13,7 +14,7 @@ class VideoUserP extends Component {
             comment : ""
         }
     }
-    
+
 
     postLike = () => {
         if (this.state.like == 0) {
@@ -29,10 +30,10 @@ class VideoUserP extends Component {
         }
         else if (this.state.like < 2) {
             this.setState({
-                like:this.props.d.like==0
+                like: this.props.d.like == 0
             })
         }
-        else if(this.state.like>1){
+        else if (this.state.like > 1) {
             this.setState({
                 likes: true,
                 like: this.props.d.likes - 1,
@@ -42,31 +43,16 @@ class VideoUserP extends Component {
                 this.updatelikes()
             })
         }
-        // else if (this.state.like > 0 && this.state.timeclick > 0) {
-        //     this.setState({
-        //         likes: true,
-        //         like: this.props.d.likes - 1,
 
-        //     }, function () {
-        //         this.updatelikes()
-        //     })
-        // }
-        // else if (this.state.like < 1) {
-        //     this.setState({
-        //         likes: true,
-        //         like: this.props.d.likes + 1,
-
-
-        //     }, function () {
-        //         this.updatelikes()
-        //     })
-        // }
     }
+    updateUserVideo = (data) => {
+        axios.put('http://localhost:5000/like', data)
+        //   .then( (response) => {
+        //     this.myData()
+        //   })
+      }
 
-    // updatelikes = () => {
-    //     let datas = this.props.updateUserVideo({ data: this.state.like, prop: 'likes', username: this.props.username, videoId: this.props.d.videoId })
-    //     console.log(datas)
-    // }
+
     like = () =>{
         let vid = this.props.d
         let data ={
@@ -93,6 +79,7 @@ class VideoUserP extends Component {
         this.setState({
             comment: ""
         })
+
     }
 
 
@@ -100,12 +87,13 @@ class VideoUserP extends Component {
         return (
             <div >
                 <div>
-                  
+
                     <div className="card4">
                         <div onClick={this.like} className="container">
                             <i class="fas fa-heart"></i>
                             {this.state.likes ? this.props.d.likes.num : this.props.d.likes.num}
                         </div>
+
                     </div>
                     <video className="videoss" width="400" height="300" controls>
                         <source src={`http://localhost:5000/video/${this.props.d.videoId}`} />

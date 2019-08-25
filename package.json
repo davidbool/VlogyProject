@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/davidbool/VlogyProject/issues"
   },
-  "homepage": "https://github.com/davidbool/VlogyProject#readme"
+  "homepage": "https://github.com/davidbool/VlogyProject#readme",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "react-draggable": "^3.3.2",
+    "react-infinite-scroller": "^1.2.4"
+  }
 }
