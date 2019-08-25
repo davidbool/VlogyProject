@@ -23,11 +23,22 @@ router.put('/updateUser', (req, res) => {
   })
 })
 
-router.put('/updateUser/video', (req, res) => {
-  User.findOne({username: req.body.username}, function(err,doc){
+router.put('/like', (req, res) => {
+  User.findOne({username: req.body.uploader}, function(err,doc){
     let newuplouds = [...doc.uploads]
     doc.uploads = []
-    newuplouds.find(u => u.videoId === req.body.videoId)[req.body.prop] = req.body.data 
+    if (typeof (num) == "number"){
+      newuplouds.find(u => u.videoId === req.body.videoId).likes = {}
+    }
+    let ob = newuplouds.find(u => u.videoId === req.body.videoId).likes
+    if(ob.users.find(u => u === req.body.username) == undefined){
+      ob.users.push(req.body.username)
+      ob.num++
+    }
+    else{
+      ob.users = ob.users.filter(u => u !== req.body.username)
+      ob.num--
+    }
     newuplouds.forEach(v => doc.uploads.push(v))
     doc.save(function(err){res.send(err)})
   })
@@ -38,10 +49,10 @@ router.put('/updateUser/video', (req, res) => {
 //input: username, videoId, comment 
 //save the comment in the user DB in the uploads array
 router.put('/addComment', (req, res) =>{ 
-  User.findOne({username: req.body.username}, function(err, doc){
+  User.findOne({username: req.body.uploader}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
-    newArr[index].comments.push(req.body.comment)
+    newArr[index].comments.push({text :req.body.comment, user: req.body.username)
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
     doc.save(function(err){res.send(err)})
@@ -54,7 +65,7 @@ router.put('/uploadVideo', (req, res) =>{
     doc.uploads.push({
       videoId: req.body.filename,
       date: date,
-      likes: 0,
+      likes: {num : 0, users: []},
       comments: []
     })
     doc.save(function(err){res.end()})
@@ -185,7 +196,7 @@ router.delete('/comment', (req, res) =>{
   User.findOne({username: req.body.username}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
-    let i = newArr[index].comments.findIndex(c => c == req.body.comment)
+    let i = newArr[index].comments.findIndex(c => c.text == req.body.comment)
     newArr[index].comments.splice(i,1)
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
