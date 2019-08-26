@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Comment from './Comment';
+import CommentPage from './CommentPage';
 import axios from 'axios';
 
 class VideoUserP extends Component {
@@ -11,8 +11,16 @@ class VideoUserP extends Component {
             like: 0,
             likes: false,
             timeclick: 0,
-            comment : ""
+            comment: "",
+            showcomments: false,
         }
+    }
+
+    showcomments = () => {
+        this.setState({
+            showcomments: !this.state.showcomments
+        })
+
     }
 
 
@@ -50,26 +58,26 @@ class VideoUserP extends Component {
         //   .then( (response) => {
         //     this.myData()
         //   })
-      }
+    }
 
 
-    like = () =>{
+    like = () => {
         let vid = this.props.d
-        let data ={
+        let data = {
             username: localStorage.getItem("username"),
             videoId: vid.videoId,
             uploader: this.props.username
         }
         this.props.likeVid(data)
     }
-    handleInput = (e) =>{
+    handleInput = (e) => {
         this.setState({
             comment: e.target.value
         })
     }
-    
-    commentfunction = () =>{
-        let data ={
+
+    commentfunction = () => {
+        let data = {
             username: localStorage.getItem("username"),
             videoId: this.props.d.videoId,
             comment: this.state.comment,
@@ -84,27 +92,37 @@ class VideoUserP extends Component {
 
 
     render() {
+        let d = this.props.d;
         return (
-            <div >
-                <div>
 
-                    <div className="card4">
-                        <div onClick={this.like} className="container">
-                            <i class="fas fa-heart"></i>
-                            {this.state.likes ? this.props.d.likes.num : this.props.d.likes.num}
+            <div >
+
+
+                <div class="card7">
+
+                    <div className="container" >
+                        <video className="videoss" width="400" height="300" controls>
+                            <source src={`http://localhost:5000/video/${this.props.d.videoId}`} />
+                        </video>
+      
+                        <div>
+                         <i onClick={this.showcomments} class="far fa-comment-dots"></i>
+                         <i id="mylikes" onClick={this.like} class="fab fa-gratipay"></i><span className="numlikes">{d.likes.num}</span>
                         </div>
+                        {this.state.showcomments ? <div><div class="dialogbox7">
+
+                            {this.props.d.comments.map(c => <CommentPage deleteComment={this.props.deleteComment} comment={c} user={this.props.username} vidId={this.props.d.videoId} />)}
+
+
+                        </div>  <span><input className="commentsss8" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' /> <span onClick={this.commentfunction}><i class="fas fa-plus"></i>
+
+                        </span></span></div> : null}
 
                     </div>
-                    <video className="videoss" width="400" height="300" controls>
-                        <source src={`http://localhost:5000/video/${this.props.d.videoId}`} />
-                    </video>
-                    <div className="commentcontainer">
-                    <input className="commentsss" type='text' value={this.state.comment} onChange={this.handleInput} placeholder='comment' />
-                    <span onClick={this.commentfunction}><i class="fas fa-paper-plane"></i></span>
-                </div>
-                    {this.props.d.comments.map(c => <Comment deleteComment ={this.props.deleteComment} comment ={c} user={this.props.username} vidId ={this.props.d.videoId} />)}
                 </div>
             </div>
+
+
 
         )
     }

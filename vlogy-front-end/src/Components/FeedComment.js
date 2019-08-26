@@ -15,20 +15,15 @@ class FeedComment extends Component {
         let comment = this.props.c
         return (<div >
             <span>  <div class="dialogbox">
-                
+
                 <div class="body">
-                <span onClick={this.delete}><i class="fas fa-trash"></i></span>
+                {localStorage.getItem("username") === comment.user ? <span onClick={this.delete}><i class="fas fa-trash"></i></span>:null}
                     <span class="tip tip-left"></span>
+                    {localStorage.getItem("username") === comment.user ? <h6>Me:</h6> : <h6>{comment.user}:</h6>}
 
-                                <h6>{comment.user}:</h6>
-                                {/* <div onClick={this.delete}><i class="fas fa-trash-alt"></i></div> */}
-                                <div class="message">
-                                    <span>{comment.text}</span>
-                                </div>
-
-
+                    {/* <div onClick={this.delete}><i class="fas fa-trash-alt"></i></div> */}
                     <div class="message">
-                        <span>{comment}</span>
+                        <span>{comment.text}</span>
                     </div>
 
                 </div>

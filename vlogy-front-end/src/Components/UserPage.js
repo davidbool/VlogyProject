@@ -82,10 +82,10 @@ class UserPage extends Component {
 
                         </form>
 
-                        <div>
-                            {!this.state.userdata.uploads ? null : this.state.userdata.uploads.map(d =>
+                        <div >
+                            {!this.state.userdata.uploads ? null : this.state.userdata.uploads.map(d =><div className="vidcontainer"  >
                              <VideoUserP deleteComment={this.deleteComment} comment ={this.comment} likeVid={this.likeVid} d={d} username={this.state.userdata.username} />
-                            )}
+                           </div> )}
 
                         </div>
 

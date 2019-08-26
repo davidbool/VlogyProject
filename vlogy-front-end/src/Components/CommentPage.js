@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Comment extends Component {
+class CommentPage extends Component {
     constructor() {
         super()
         this.state = {
@@ -43,14 +43,14 @@ class Comment extends Component {
         return (
             <div>
                 
-                <div class="dialogbox3">
-                    <div class="body3">
+                <div class="dialogbox">
+                    <div class="body">
                         <span class="tip tip-left"></span>
-                        <div class="message3">
-                            <span onClick={this.delete}><i class="fas fa-times"></i></span>
+                        <div class="message">
+                        {localStorage.getItem("username") === c.user?<span onClick={this.delete}><i class="fas fa-times"></i></span>:null}
                             {localStorage.getItem("username") === c.user?<h6>Me:</h6>:<h6>{c.user}:</h6>}
                             
-                            <div class="message">
+                            <div >
                                 <span>{c.text}</span>
                             </div>
 
@@ -62,4 +62,4 @@ class Comment extends Component {
     }
 }
 
-export default Comment
+export default CommentPage
