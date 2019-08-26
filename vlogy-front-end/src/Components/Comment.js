@@ -26,60 +26,37 @@ class Comment extends Component {
             box: newBox
         })
     }
-    delete = () =>{
-        let data ={
+    delete = () => {
+        let data = {
             username: this.props.user,
             videoId: this.props.vidId,
             comment: this.props.comment.text
         }
-        this.props.deleteComment(data)    
+        this.props.deleteComment(data)
     }
 
 
 
     render() {
-        // console.log(this.state.box.sort(function(a,b){return b-a}))
+
         let c = this.props.comment
         return (
             <div>
-                 <h6>{c.user}:</h6>
-                                <div class="message">
-                                    <span>{c.text}</span>
-                                </div>
-                                <span onClick={this.delete}>X</span>
-
-
-
-                {/* <div className="commentcontainer">
-                    <input className="commentsss" type='text' value={this.state.comment} onChange={this.post} placeholder='comment' />
-                    <span onClick={this.commentfunction}><i class="fas fa-paper-plane"></i></span>
-                </div> */}
-
-                {/* <div className="card2">
-                    <div className="container">
-                        <i class="fas fa-heart"></i>
-                        {c === undefined ? null : <span>  <div class="dialogbox">
-                            <div class="body">
-                                <span class="tip tip-left"></span>
-
-                                <div onClick={this.delete}><i class="fas fa-trash-alt"></i></div>
-                                <h6>{c.user}:</h6>
-                                <div class="message">
-                                    <span>{c.text}</span>
-                                </div>
-
+                
+                <div class="dialogbox3">
+                    <div class="body3">
+                        <span class="tip tip-left"></span>
+                        <div class="message3">
+                            <span onClick={this.delete}><i class="fas fa-times"></i></span>
+                            {localStorage.getItem("username") === c.user?<h6>Me:</h6>:<h6>{c.user}:</h6>}
+                            
+                            <div class="message">
+                                <span>{c.text}</span>
                             </div>
 
-                        </div>  </span>
-                        }
-
-
-
+                        </div>
                     </div>
-
-                </div> */}
-
-
+                </div>
             </div>
         )
     }

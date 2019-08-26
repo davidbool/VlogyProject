@@ -36,6 +36,7 @@ class Landing extends Component {
 
 
     render() {
+        let userPic = this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
         console.log(this.props.UserData.username)
         let data = this.props.allData
         let searchdata = data.filter(r => r.username.toLowerCase().includes(this.state.searchPut))
@@ -47,16 +48,22 @@ class Landing extends Component {
                 <div>
 
                     <ul>
-                    {localStorage.getItem("username") === 'undefined'? <li><a class="active" href="/">Feed</a></li>:<li><a class="active" href="/feed">Feed</a></li>}
-                        {localStorage.getItem("username") === 'undefined'? null:<li><a href="/userprofile">My Profile</a></li>}
+                    
+                    {localStorage.getItem("username") === 'undefined'? <li><div><a class="fas fa-home" href="/"></a></div></li>:<li><a class="fas fa-home" href="/feed"></a></li>}
+                        {localStorage.getItem("username") === 'undefined'? null:<li><a href="/userprofile"><img className="usernameimg4" src={userPic} /></a></li>}
                         
-                        {localStorage.getItem("username") === 'undefined' ? <button className="inputcon" type="submit"><i class="fa fa-search"></i></button> : <a href="/usersearch"><button className="inputcon" type="submit"><i class="fa fa-search"></i></button></a>}
+                        {localStorage.getItem("username") === 'undefined' ? null :  <a href="/usersearch"><button className="inputcon" type="submit"><i class="fa fa-search"></i></button></a>}
 
-                        <input value={this.state.searchPut} onChange={this.searchPutChange} className="searchcontainer" type="text" placeholder="Search.." name="search" />
-
+                        {localStorage.getItem("username") === 'undefined' ? null  :  <input value={this.state.searchPut} onChange={this.searchPutChange} className="searchcontainer" type="text" placeholder="Search.." name="search" />}
+                        <div className="vlogy">Vlogy</div>
+                       
                     </ul>
 
                 </div>
+               
+
+
+
 
                 <Router>
 

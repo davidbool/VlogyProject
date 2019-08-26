@@ -58,8 +58,9 @@ class Feed extends Component {
     getFeed = async () => {
         let videos = await axios.get('http://localhost:5000/feed')
         let feed = videos.data.filter(o => o.user.username !== localStorage.getItem("username"))
-        this.setState({ data: feed })
+        this.setState( {data : feed} )
     }
+
     componentDidMount = async () => {
         this.getFeed()
     }
@@ -96,7 +97,7 @@ class Feed extends Component {
     }
     
     render() {
-        
+        console.log(this.state.data)
         return (
             <Router>
                 <div className='feed'>
@@ -114,8 +115,9 @@ class Feed extends Component {
                     <div className='input'>
 
 
-                        {this.state.showupload ?
-                            <div><div onClick={this.showupload} ><li class="fas fa-video"></li></div>
+                        {this.state.showupload ? 
+                            <div><div onClick={this.showupload} >  <li class="fas fa-video"></li></div>
+                            
                             <Draggable>
                                 <div className="uploadcontainer2">
                                     <input className="inputupload" type='file' ref={this.state.file} />
@@ -123,7 +125,7 @@ class Feed extends Component {
                                 </div></Draggable> </div> :
                             <div onClick={this.showupload} ><li class="fas fa-video"></li></div>}
                         <div>
-                        {this.state.data.map(v => <FeedVideo deleteComment ={this.deleteComment} likeVid ={this.likeVid} vid ={v} UserData={this.state.UserData} date={v.user.uploads[0].date[0]} comment = {this.comment} />)}
+                        {this.state.data.map(v => <FeedVideo users={v.likes.users} deleteComment ={this.deleteComment} likeVid ={this.likeVid} vid ={v} UserData={this.state.UserData} date={v.user.uploads[0].date[0]} comment = {this.comment} />)}
                         </div>
 
                     </div>

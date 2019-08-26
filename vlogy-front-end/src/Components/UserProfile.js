@@ -18,8 +18,15 @@ class UserProfile extends Component {
             editimg: false,
             editingtwo: false,
             file: React.createRef(),
-            showupload: false
+            showupload: false,
+            edit:false
         }
+    }
+
+    edit=()=>{
+        this.setState({
+            edit:!this.state.edit
+        })
     }
 
     updateUser = () => {
@@ -117,7 +124,8 @@ class UserProfile extends Component {
             url: `http://localhost:5000/files/${videoId}/${username}`,
         }).then((response) => {
             console.log(response)
-            this.getvideo()
+            // this.getvideo()
+
         })
     }
 
@@ -142,7 +150,7 @@ class UserProfile extends Component {
                     file: React.createRef(),
                     showupload: false
                 })
-                this.getvideo()
+                // this.getvideo()
             })
         })
     }
@@ -212,19 +220,29 @@ class UserProfile extends Component {
                         <form >
                             <label for="fname">About MySelf</label>
                             {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about) === undefined || this.state.editingtwo ? <input value={this.props.UserData.about} onChange={this.handleAbout} type="text" className="aboutmyself" name="fname" /> :
-                                <div type="text" className="aboutmyself" name="fname">{this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about)}<i onClick={this.handleeditimgtwo} className="fas fa-pencil-alt"></i> </div>}
+                            <div type="text" className="aboutmyself" name="fname">{this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(r => r.about)}<span> {this.state.edit?<i onClick={this.handleeditimgtwo} className="fas fa-pencil-alt"></i>:null} </span></div> }
 
 
 
                         </form>
 
                         <div>
+                       <div onClick={this.edit}><i class="far fa-edit"></i></div> 
+
+
                             {this.state.UserData.uploads.map(d =>
-                                <div>
+                            this.state.edit?
+                                <div className="video-container">
                                     <div onClick={this.deleteVideo}><i class="fas fa-trash"></i>
                                     </div>
+                                    
                                     <Video likeVid={this.likeVid} userdata={this.state.UserData} d={d} deleteComment={this.deleteComment} comment={this.comment} />
-                                </div>
+                                    
+                                </div>:
+                                 <div className="video-container">
+                                 <Video likeVid={this.likeVid} userdata={this.state.UserData} d={d} deleteComment={this.deleteComment} comment={this.comment} />
+                             </div>
+                            
                             )}
 
                         </div>
