@@ -43,10 +43,10 @@ class CommentPage extends Component {
         return (
             <div>
                 
-                <div class="dialogbox">
-                    <div class="body">
+                <div class="dialogbox3">
+                    <div class="body3">
                         <span class="tip tip-left"></span>
-                        <div class="message">
+                        <div class="message3">
                         {localStorage.getItem("username") === c.user?<span onClick={this.delete}><i class="fas fa-times"></i></span>:null}
                             {localStorage.getItem("username") === c.user?<h6>Me:</h6>:<h6>{c.user}:</h6>}
                             

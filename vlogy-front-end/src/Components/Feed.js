@@ -115,8 +115,9 @@ class Feed extends Component {
                     <div className='input'>
 
 
-                        {this.state.showupload ?
-                            <div><div onClick={this.showupload} ><li class="fas fa-video"></li></div>
+                        {this.state.showupload ? 
+                            <div><div onClick={this.showupload} >  <li class="fas fa-video"></li></div>
+                            
                             <Draggable>
                                 <div className="uploadcontainer2">
                                     <input className="inputupload" type='file' ref={this.state.file} />

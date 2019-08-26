@@ -327,7 +327,6 @@ article:hover a {
   border: 1px solid transparent;
   border-radius: 34px;
   margin: 1vw;
- 
 }
 
 .videossss {
@@ -355,15 +354,14 @@ article:hover a {
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
 }
 
-.vidcontainer{
+.vidcontainer {
   display: inline-grid;
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   grid-gap: 2rem;
 }
 
-.dot{
+.dot {
   position: absolute;
-
 }
 
 .oasswordorusername {
@@ -390,7 +388,7 @@ article:hover a {
   width: 40%;
 }
 
-.fa-times{
+.fa-times {
   margin-left: 17vw
 }
 
@@ -405,7 +403,7 @@ article:hover a {
   color: rgb(0, 174, 255)
 }
 
-.videopop{
+.videopop {
   position: absolute;
   width: 300px;
   height: 300px;
@@ -619,7 +617,7 @@ li a:hover {
   height: auto;
   margin: 20px 10px;
   padding: 5px;
-  background-color:#F1D8D8;
+  background-color: #F1D8D8;
   border-radius: 3px;
   border: 5px solid rgba(255, 255, 255, 0.623);
 }
@@ -638,28 +636,22 @@ li a:hover {
   margin-bottom: 0.3vw
 }
 
-
-
-
-.dialogbox5  {
+.dialogbox5 {
   overflow-x: scroll;
   overflow-y: scroll;
   white-space: nowrap;
   overflow: auto;
   height: 21vw;
-  
 }
 
-
-.dialogbox7  {
+.dialogbox7 {
   overflow-x: scroll;
   overflow-y: scroll;
   white-space: nowrap;
   overflow: auto;
   height: 21vw;
-  
+  opacity: 1;
 }
-
 
 .dialogbox .body {
   position: relative;
@@ -670,7 +662,6 @@ li a:hover {
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
   border: 5px solid rgba(255, 255, 255, 0.623);
-  
 }
 
 .dialogbox .body:hover {
@@ -773,7 +764,7 @@ li a:hover {
   font-size: 2vw;
   position: absolute;
   top: 27%;
-  right: 55%
+  right: 48%
 }
 
 .grid:hover {
@@ -794,11 +785,14 @@ li a:hover {
 }
 
 .fa-video {
-  font-size: 7vw;
-  color: pink;
-  position: absolute;
-  top: 17%;
-  right: 10%;
+  font-size: 3vw;
+  color: rgba(255, 192, 203, 0.644);
+  position: fixed;
+  top: 83%;
+  right: 2%;
+  padding: 1.5vw;
+  border: 5px solid #0000007a;
+  border-radius: 100px;
 }
 
 .fa-video:active {
@@ -855,7 +849,7 @@ li a:hover {
   color: rgb(255, 0, 0);
 }
 
-.numlikes{
+.numlikes {
   font-size: 1vw
 }
 
@@ -865,15 +859,14 @@ li a:hover {
   
   
 } */
-.fa-gratipay{
+
+.fa-gratipay {
   font-size: 2vw;
   color: rgb(255, 0, 0);
   margin-left: 23vw
 }
 
 .fa-trash {
- 
-  
   font-size: 1vw;
   color: #111
 }
@@ -902,14 +895,12 @@ li a:hover {
   right: 28vw;
 }
 
-
 .commentsss7 {
   background-color: transparent;
   border: none;
   color: rgb(0, 0, 0);
   font-size: 1.3vw;
   border-bottom: 2px solid rgb(255, 238, 0);
-  
 }
 
 .commentsss8 {
@@ -918,8 +909,6 @@ li a:hover {
   color: rgb(0, 0, 0);
   font-size: 1.3vw;
   border-bottom: 2px solid rgb(255, 238, 0);
-  
-  
 }
 
 .commentsss5 {
@@ -942,16 +931,15 @@ li a:hover {
   right: 26vw
 }
 
-
-.fa-plus{
-  font-size:1.4vw
+.fa-plus {
+  font-size: 1.4vw
 }
+
 /* .fa-paper-plane2 {
   font-size: 27px;
   position: absolute;
   right: 45vw
 } */
-
 
 .commentsss:hover {
   background-color: #1111116c
@@ -966,8 +954,8 @@ li a:hover {
 }
 
 .myfeed {
-  font-family: "Brush Script MT";
-  margin-left: 35vw;
+  font-family: fantasy;
+  margin-left: 38vw;
   color: #000000;
   background: transparent;
   text-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #ffffff;

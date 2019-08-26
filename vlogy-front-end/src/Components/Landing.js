@@ -49,7 +49,7 @@ class Landing extends Component {
 
                     <ul>
                     
-                    {localStorage.getItem("username") === 'undefined'? <li><a class="fas fa-home" href="/"></a></li>:<li><a class="fas fa-home" href="/feed"></a></li>}
+                    {localStorage.getItem("username") === 'undefined'? <li><div><a class="fas fa-home" href="/"></a></div></li>:<li><a class="fas fa-home" href="/feed"></a></li>}
                         {localStorage.getItem("username") === 'undefined'? null:<li><a href="/userprofile"><img className="usernameimg4" src={userPic} /></a></li>}
                         
                         {localStorage.getItem("username") === 'undefined' ? null :  <a href="/usersearch"><button className="inputcon" type="submit"><i class="fa fa-search"></i></button></a>}
