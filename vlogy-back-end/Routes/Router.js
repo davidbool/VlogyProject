@@ -197,7 +197,7 @@ router.delete('/comment', (req, res) =>{
   User.findOne({username: req.body.username}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
-    let i = newArr[index].comments.findIndex(c => c.text == req.body.comment)
+    let i = newArr[index].comments.findIndex(c => c.text == req.body.comment.text)
     newArr[index].comments.splice(i,1)
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
