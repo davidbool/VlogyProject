@@ -136,11 +136,17 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.userprofile{
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
 .aboutmyself[type=text] {
   /* width: 500px;
  height: 100px; */
   box-shadow: 7px 4px 24px -1px rgba(0, 0, 0, 0.75);
   width: 100%;
+  text-align: center;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -352,6 +358,9 @@ article:hover a {
 .video-container {
   display: inline-grid;
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  padding-left: 1vw;
+  
+  padding-bottom: 1vw
 }
 
 .vidcontainer {
@@ -413,9 +422,10 @@ article:hover a {
 .card7 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 30vw;
+  width: 27vw;
   border-top-right-radius: 2vw;
-  border-top-left-radius: 2vw
+  border-top-left-radius: 2vw;
+  
 }
 
 .card7:hover {
@@ -518,14 +528,31 @@ article:hover a {
   color: green
 }
 
+
+
+.scrolltop{
+  position: fixed;
+  font-size: 2.4vw;
+  top: 50vw;
+  left: 3vw
+}
+
+
+
+.scrolltop:hover{
+  color: pink;
+  transform: translateY(4px);
+}
+
 ul {
   list-style-type: none;
   /* margin: 0;
   padding: 0; */
   width: 100%;
   overflow: hidden;
-  background-color: rgb(241, 216, 216);
+  background-color: #F1D8D8;
   border-bottom: 2px solid #000000;
+  
 }
 
 li {
@@ -571,6 +598,7 @@ li a:hover {
 
 .fa-comment-dots {
   font-size: 2vw;
+  position: absolute
 }
 
 .aboutcontainer {
@@ -644,6 +672,18 @@ li a:hover {
   height: 21vw;
 }
 
+/* @keyframes right{
+  from{
+    margin-right: -500%;
+  }
+  to{
+    margin-right: 0;
+  }
+ }
+ 
+ .dialogbox3 .body3{animation-name: right;
+  animation-duration: 3s;} */
+
 .dialogbox7 {
   overflow-x: scroll;
   overflow-y: scroll;
@@ -651,7 +691,11 @@ li a:hover {
   overflow: auto;
   height: 21vw;
   opacity: 1;
+  
 }
+
+
+ 
 
 .dialogbox .body {
   position: relative;
@@ -784,6 +828,10 @@ li a:hover {
   box-shadow: 7px 4px 24px -1px rgba(255, 255, 255, 0.75);
 }
 
+#red{
+  color: red;
+}
+
 .fa-video {
   font-size: 3vw;
   color: rgba(255, 192, 203, 0.644);
@@ -850,7 +898,10 @@ li a:hover {
 }
 
 .numlikes {
-  font-size: 1vw
+  font-size: 1vw;
+  margin-left: 25vw;
+  margin-bottom: 10vw
+
 }
 
 /* #mylikes{
@@ -860,10 +911,19 @@ li a:hover {
   
 } */
 
+.likie{
+  padding-bottom: 1.3vw
+}
+
 .fa-gratipay {
   font-size: 2vw;
-  color: rgb(255, 0, 0);
-  margin-left: 23vw
+  color: rgb(0, 0, 0);
+  margin-left: 23vw;
+  position: absolute
+}
+
+.malikes{
+  margin-left: 25vw
 }
 
 .fa-trash {

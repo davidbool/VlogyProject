@@ -13,6 +13,7 @@ class VideoUserP extends Component {
             timeclick: 0,
             comment: "",
             showcomments: false,
+            red: false
         }
     }
 
@@ -69,10 +70,16 @@ class VideoUserP extends Component {
             uploader: this.props.username
         }
         this.props.likeVid(data)
+        this.setState({
+            red: !this.state.red
+        })
     }
+
     handleInput = (e) => {
         this.setState({
-            comment: e.target.value
+            comment: e.target.value,
+
+
         })
     }
 
@@ -92,7 +99,10 @@ class VideoUserP extends Component {
 
 
     render() {
+        console.log(this.props.d.comments)
         let d = this.props.d;
+       
+        // let liked= d.likes.users.map(r=> r === localStorage.getItem("username") )
         return (
 
             <div >
@@ -101,15 +111,18 @@ class VideoUserP extends Component {
                 <div class="card7">
 
                     <div className="container" >
-                        <video className="videoss" width="400" height="300" controls>
+                        <video className="videoss" width="355" height="300" controls>
                             <source src={`http://localhost:5000/video/${this.props.d.videoId}`} />
                         </video>
-      
+
                         <div>
-                         <i onClick={this.showcomments} class="far fa-comment-dots"></i>
-                         <i id="mylikes" onClick={this.like} class="fab fa-gratipay"></i><span className="numlikes">{d.likes.num}</span>
+                            <i onClick={this.showcomments} class="far fa-comment-dots"></i>
+                            {/* {d.likes.users.map(r=> r === localStorage.getItem("username") ?
+                             <div><i id="mylikes" onClick={this.like} class="fab fa-gratipay" id= "red"  ></i><span className="numlikes">{d.likes.num}</span> </div>: 
+                            null)} */}
+                            <i id="mylikes" onClick={this.like} class="fab fa-gratipay" id={this.state.red ? "red" : "b"} ></i><span className="numlikes">{d.likes.num}</span>
                         </div>
-                        {this.state.showcomments ? <div><div class="dialogbox7">
+                        {this.state.showcomments ? <div className="dugma"><div class="dialogbox7">
 
                             {this.props.d.comments.map(c => <CommentPage deleteComment={this.props.deleteComment} comment={c} user={this.props.username} vidId={this.props.d.videoId} />)}
 
