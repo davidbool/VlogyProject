@@ -102,6 +102,42 @@ router.get('/username/:username/password/:password', (req, res) =>{
   })
 })
 
+router.put('/follow', (req, res) =>{
+  User.findOne({username: req.body.user}, (err, doc) =>{
+    User.findOne({username: req.body.follwer}, (er, d) =>{
+      let i = -1
+      let j = -1
+      for (let f of doc.followers){
+        let id ="" + f[0]
+        if(id == d._id){
+          i ++
+          break
+        }
+        else i++
+      }
+      for (let u of d.following){
+        let id ="" + u[0]
+        if(id == doc._id){
+          j++
+          break
+        }
+        else j++
+      }
+      if( i == -1){
+        doc.followers.push(d)
+        d.following.push(doc)
+      }
+      else{
+        doc.followers.splice(i,1)
+        d.following.splice(j,1)
+      }
+      
+      doc.save()
+      d.save(function(err){res.end()})
+    })
+  })
+})
+
 
 router.post('/newUser', (req, res) => { //adds a new user
     let data = req.body
@@ -197,7 +233,7 @@ router.delete('/comment', (req, res) =>{
   User.findOne({username: req.body.username}, function(err, doc){
     let newArr = [...doc.uploads]
     let index = newArr.findIndex(x => x.videoId == req.body.videoId)
-    let i = newArr[index].comments.findIndex(c => c.text == req.body.comment)
+    let i = newArr[index].comments.findIndex(c => c.text == req.body.comment.text)
     newArr[index].comments.splice(i,1)
     doc.uploads = []
     newArr.forEach(v => doc.uploads.push(v))
