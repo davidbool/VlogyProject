@@ -55,12 +55,12 @@ class Video extends Component {
         <div class="card7">
 
           <div className="container">
-            <video className="videoss" width="400" height="300" controls>
+            <video className="videoss" width="355" height="300" controls>
               <source src={`http://localhost:5000/video/${d.videoId}`} />
             </video>
-            <div>
+            <div className="likie">
             <i onClick={this.showcomments} class="far fa-comment-dots"></i>
-           <i id="mylikes"  onClick={this.like} class="fab fa-gratipay"></i><span>{d.likes.num}</span>
+           <i id="mylikes"  onClick={this.like} class="fab fa-gratipay"></i><span className="malikes">{d.likes.num}</span>
            </div>
             
             {this.state.showcomments ? <div><div class="dialogbox5">

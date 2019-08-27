@@ -11,6 +11,7 @@ class Videos extends Component {
         super()
         this.state = {
             comment: '',
+            red:false
         }
     }
 
@@ -39,6 +40,9 @@ class Videos extends Component {
         }
         this.props.likeVid(data)
         console.log(data)
+        this.setState({
+            red:!this.state.red
+        })
     }
 
     render() {
@@ -73,7 +77,7 @@ class Videos extends Component {
 
                             {/* </span>{vid.likes.num}</div>} */}
                             
-                            <div><span onClick={this.like}><i class="fas fa-heart"></i></span>{vid.likes.num}</div>
+                            <div><span onClick={this.like}><i class="fas fa-heart" id={this.state.red ? "red"  : "b"}></i></span>{vid.likes.num}</div>
 
                         </div>
 

@@ -200,7 +200,7 @@ class UserProfile extends Component {
                             :
                             <div className='usernameprofile'> <img className="usernameimg" src={userPic} /> <div onClick={this.handleeditimg} ><i class="fas fa-user-edit"></i></div>  {localStorage.getItem("username")}  </div>}
                         <div>{this.state.editimg ? <input className="imginput" value={this.state.img} onChange={this.handleimg} placeholder="put image url" /> : null}</div>
-
+                        <div onClick={this.edit}><i class="far fa-edit"></i></div> 
 
                         {/* {this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(f => <div className="followersprofile"><div>Following: {f.following} </div><div>Followers: {f.followers}</div></div>)} */}
 
@@ -227,7 +227,7 @@ class UserProfile extends Component {
                         </form>
 
                         <div>
-                       <div onClick={this.edit}><i class="far fa-edit"></i></div> 
+                      
 
 
                             {this.state.UserData.uploads.map(d =>

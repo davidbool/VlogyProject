@@ -56,13 +56,12 @@ class Landing extends Component {
 
                         {localStorage.getItem("username") === 'undefined' ? null  :  <input value={this.state.searchPut} onChange={this.searchPutChange} className="searchcontainer" type="text" placeholder="Search.." name="search" />}
                         <div className="vlogy">Vlogy</div>
+                        
                        
                     </ul>
 
                 </div>
                
-
-
 
 
                 <Router>
