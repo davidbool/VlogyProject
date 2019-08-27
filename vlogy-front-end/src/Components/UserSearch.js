@@ -3,27 +3,37 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import UserPage from './UserPage';
 
-
 class UserSearch extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             comment: '',
-            follow: false,
-            following: ''
+            follow: this.chekFollowStatus(),
 
         }
 
     }
 
-  
-
-    // updatefollowing = () => {
-    //     let datas = this.props.updateUser({ data: this.state.following, prop: 'following', username: localStorage.getItem("username") })
-    //     console.log(datas)
-    // }
-
-
+    chekFollowStatus = async() =>{
+        let username = localStorage.getItem("username")
+        let password = localStorage.getItem("password")
+        let user = await axios.get(`http://localhost:5000/username/${username}/password/${password}`)
+        let i = this.props.followers.findIndex(d => d == user.data[0]._id)
+        if(this.props.followers.findIndex(d => d == user.data[0]._id) > -1){
+            this.setState({
+                follow : true
+            })
+        }
+        else{
+            this.setState({
+            follow : false  
+          })
+        }
+        return true
+    }
+    componentDidMount = () =>{
+        this.chekFollowStatus()
+    }
     followbutton = (f) => {
        
         if (this.state.follow == true) {
@@ -33,18 +43,21 @@ class UserSearch extends Component {
             })
 
         } else {
-            let following = f.target.value
             this.setState({
-                following,
                 follow: !this.state.follow
             })
         }
-
-        console.log(this.state.following)
+        let data ={
+            follwer: localStorage.getItem("username"), 
+            user: this.props.username
+        }
+        this.props.follow(data)
     }
 
 
     render() {
+        console.log(this.props.followers)
+        console.log(this.props.following)
 
         let urls = `/user/${this.props.username}`
 
@@ -73,8 +86,8 @@ class UserSearch extends Component {
                                 <a href='/userprofile'> <img className="usernameimg" src={f.profilePic} /> </a> :
                                 <a href={urls}> <img className="usernameimg" src={f.profilePic} /> </a>}</div>
                         )}
-                        <p>following:{this.props.following}</p>
-                        <p>followers:{this.props.followers}</p>
+                        <p>following:{this.props.following.length}</p>
+                        <p>followers:{this.props.followers.length}</p>
                     </div>
                 </div>
             </div>
