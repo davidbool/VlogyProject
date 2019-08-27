@@ -17,17 +17,37 @@ class Landing extends Component {
         super()
         this.state = {
             searchPut: '',
-          
-
+            allData: []
         }
     }
    
+    myData = async () => {
+        let data = await axios.get('http://localhost:5000/users')
+        let allData = data.data
+        this.setState({
+          allData
+        })
+      }
+      componentDidMount = () =>{
+          this.myData()
+      }
 
+    followUser = (data) =>{
+        axios({
+            method: 'put',
+            url: 'http://localhost:5000/follow',
+            data: {
+              user: data.user,
+              follwer: data.follwer
+            }
+          }).then((res) => {
+            this.myData()
+          })
+    }
     searchPutChange = (event) => {
         const input = event.target.value
         this.setState({
             searchPut: input,
-
         })
 
     }
@@ -36,9 +56,11 @@ class Landing extends Component {
 
 
     render() {
-        let userPic = this.props.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
-        console.log(this.props.UserData.username)
-        let data = this.props.allData
+        let userPic = this.state.allData.filter(u => u.username == localStorage.getItem("username")).map(p => p.profilePic)
+        let data = this.state.allData
+        let i = data.findIndex(u => u.username == localStorage.getItem('username'))
+        if(i > -1) data.splice(i,1)
+        console.log(data)
         let searchdata = data.filter(r => r.username.toLowerCase().includes(this.state.searchPut))
 
         return (
@@ -74,11 +96,11 @@ class Landing extends Component {
                     <Route path="/gridfeed" exact render={() => <Feedsecond />}/>
                     <Route path="/usersearch" exact render={() =>
                         this.state.searchPut === '' ?
-                            data.map(r => <UserSearch allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />) :
-                            searchdata.map(r => <UserSearch updateUser={this.props.updateUser} allData={this.props.allData} username={r.username} following={r.following} followers={r.followers} />)
+                            data.map(r => <UserSearch follow ={this.followUser} allData={this.state.allData} username={r.username} following={r.following} followers={r.followers} />) :
+                            searchdata.map(r => <UserSearch follow ={this.followUser} updateUser={this.props.updateUser} allData={this.state.allData} username={r.username} following={r.following} followers={r.followers} />)
                     } />
 
-                    <Route path='/userprofile' exact render={() => <UserProfile updateUser={this.props.updateUser} allData={this.props.allData} updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
+                    <Route path='/userprofile' exact render={() => <UserProfile updateUser={this.props.updateUser} allData={this.state.allData} updateprofile={this.props.updateprofile} deleteuser={this.props.deleteuser} UserExict={this.props.UserExict} UserData={this.props.UserData} />} />
                     <Route path='/user/:username' exact render={({ match }) => <UserPage updateUser={this.props.updateUser} match={match} UserData={this.props.UserData} />} />
                 </Router>
 

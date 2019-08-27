@@ -124,7 +124,7 @@ class UserProfile extends Component {
             url: `http://localhost:5000/files/${videoId}/${username}`,
         }).then((response) => {
             console.log(response)
-            // this.getvideo()
+            this.getUser()
 
         })
     }
@@ -150,7 +150,7 @@ class UserProfile extends Component {
                     file: React.createRef(),
                     showupload: false
                 })
-                // this.getvideo()
+                this.getUser()
             })
         })
     }
