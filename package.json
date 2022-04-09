@@ -18,7 +18,7 @@
   "homepage": "https://github.com/davidbool/VlogyProject#readme",
   "dependencies": {
     "emoji-picker-react": "^2.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-draggable": "^3.3.2",
     "react-infinite-scroller": "^1.2.4"
